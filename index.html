@@ -1,902 +1,257 @@
-
-
-Index · HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AMD Global — Healthcare Real Estate & Development</title>
+<title>AMD Global — Physician-Centric Healthcare Development</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
- 
   :root {
-    --navy: #04264a;
-    --blue: #0a4f8f;
-    --blue-mid: #1565c0;
-    --blue-bright: #2196f3;
-    --blue-light: #e3f0fd;
-    --blue-xlight: #f0f6ff;
-    --accent: #00b4d8;
-    --accent-dark: #0096b4;
-    --white: #ffffff;
-    --off-white: #f8fafd;
-    --text-primary: #0a1628;
-    --text-secondary: #3d5273;
-    --text-muted: #7a90aa;
-    --border: rgba(10,79,143,0.12);
-    --border-strong: rgba(10,79,143,0.22);
-    --font-display: 'Manrope', sans-serif;
-    --font-body: 'Inter', sans-serif;
-    --radius-sm: 6px;
-    --radius: 10px;
-    --radius-lg: 16px;
-    --radius-xl: 24px;
+    --navy: #030f21; --navy-2: #06182f; --blue: #0a4f8f; --blue-mid: #1565c0;
+    --blue-bright: #2196f3; --blue-light: #e3f0fd; --blue-xlight: #f0f6ff;
+    --accent: #00c8f0; --accent-dark: #0096b4; --teal: #00e5c3;
+    --white: #ffffff; --off-white: #f6f9fd;
+    --text-primary: #0a1628; --text-secondary: #3d5273; --text-muted: #7a90aa;
+    --border: rgba(10,79,143,0.12); --border-strong: rgba(10,79,143,0.22);
+    --font-display: 'Manrope', sans-serif; --font-body: 'Inter', sans-serif; --font-mono: 'JetBrains Mono', monospace;
+    --radius-sm: 6px; --radius: 10px; --radius-lg: 16px; --radius-xl: 24px;
     --transition: 0.2s cubic-bezier(0.4,0,0.2,1);
   }
- 
   html { scroll-behavior: smooth; }
- 
-  body {
-    font-family: var(--font-body);
-    color: var(--text-primary);
-    background: var(--white);
-    font-size: 16px;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-  }
- 
-  /* ── NAV ── */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    background: rgba(4,38,74,0.98);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-    height: 64px;
-    display: flex;
-    align-items: center;
-    padding: 0 5%;
-  }
- 
-  .nav-inner {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
- 
-  .nav-logo {
-    font-family: var(--font-display);
-    font-size: 20px;
-    font-weight: 800;
-    color: var(--white);
-    text-decoration: none;
-    letter-spacing: -0.5px;
-    cursor: pointer;
-  }
- 
-  .nav-logo span { color: var(--accent); }
- 
-  .nav-links {
-    display: flex;
-    align-items: center;
-    gap: 28px;
-    list-style: none;
-  }
- 
-  .nav-links a {
-    font-size: 13.5px;
-    font-weight: 500;
-    color: rgba(255,255,255,0.72);
-    text-decoration: none;
-    transition: color var(--transition);
-    letter-spacing: 0.01em;
-    cursor: pointer;
-    padding: 6px 0;
-    border-bottom: 2px solid transparent;
-  }
- 
-  .nav-links a:hover { color: var(--white); }
-  .nav-links a.active { color: var(--white); border-bottom-color: var(--accent); }
- 
+  body { font-family: var(--font-body); color: var(--text-primary); background: var(--white); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(255,255,255,0.96); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); height: 68px; display: flex; align-items: center; padding: 0 5%; }
+  .nav-inner { width: 100%; max-width: 1240px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+  .nav-logo { display: flex; align-items: center; cursor: pointer; }
+  .nav-logo img { height: 42px; width: auto; display: block; }
+  .nav-links { display: flex; align-items: center; gap: 26px; list-style: none; }
+  .nav-links a { font-size: 13.5px; font-weight: 500; color: var(--text-secondary); text-decoration: none; transition: color var(--transition); cursor: pointer; padding: 6px 0; border-bottom: 2px solid transparent; }
+  .nav-links a:hover { color: var(--text-primary); }
+  .nav-links a.active { color: var(--blue); border-bottom-color: var(--accent); }
   .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
-  .hamburger span { width: 22px; height: 2px; background: white; border-radius: 2px; }
- 
-  /* ── PAGES ── */
+  .hamburger span { width: 22px; height: 2px; background: var(--navy); border-radius: 2px; }
+
   .page { display: none; }
   .page.active { display: block; }
- 
-  /* ── HERO (HOME) ── */
-  .hero {
-    min-height: 88vh;
-    background: var(--navy);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 130px 5% 80px;
-    position: relative;
-    overflow: hidden;
-  }
- 
-  .hero-grid-bg {
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(33,150,243,0.035) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(33,150,243,0.035) 1px, transparent 1px);
-    background-size: 48px 48px;
-  }
- 
-  .hero-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    width: 100%;
-    position: relative;
-    z-index: 1;
-  }
- 
-  .hero-eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--accent);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: 24px;
-  }
- 
-  .hero-eyebrow::before {
-    content: '';
-    width: 24px;
-    height: 2px;
-    background: var(--accent);
-    border-radius: 2px;
-  }
- 
-  .hero h1 {
-    font-family: var(--font-display);
-    font-size: clamp(36px, 5.5vw, 66px);
-    font-weight: 800;
-    color: #ffffff;
-    line-height: 1.12;
-    letter-spacing: -1.2px;
-    max-width: 760px;
-    margin-bottom: 26px;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.25);
-  }
- 
-  .hero h1 em {
-    font-style: normal;
-    color: #33d6f5;
-  }
- 
-  .hero-sub {
-    font-size: 17px;
-    color: rgba(255,255,255,0.78);
-    max-width: 560px;
-    line-height: 1.75;
-    margin-bottom: 40px;
-  }
- 
-  .hero-actions {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    margin-bottom: 72px;
-  }
- 
-  .btn-primary {
-    background: var(--accent);
-    color: #032033;
-    font-family: var(--font-body);
-    font-size: 14px;
-    font-weight: 600;
-    padding: 13px 28px;
-    border-radius: var(--radius);
-    border: none;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-block;
-    transition: all var(--transition);
-  }
- 
-  .btn-primary:hover { background: var(--accent-dark); transform: translateY(-2px); }
- 
-  .btn-outline {
-    background: transparent;
-    color: rgba(255,255,255,0.9);
-    font-family: var(--font-body);
-    font-size: 14px;
-    font-weight: 500;
-    padding: 13px 28px;
-    border-radius: var(--radius);
-    border: 1px solid rgba(255,255,255,0.28);
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-block;
-    transition: all var(--transition);
-  }
- 
-  .btn-outline:hover { border-color: rgba(255,255,255,0.55); color: white; }
- 
-  .hero-stats {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1px;
-    background: rgba(255,255,255,0.08);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    max-width: 780px;
-    border: 1px solid rgba(255,255,255,0.1);
-  }
- 
-  .hero-stat {
-    background: rgba(255,255,255,0.05);
-    padding: 20px 24px;
-    text-align: center;
-  }
- 
-  .hero-stat-val {
-    font-family: var(--font-display);
-    font-size: 28px;
-    font-weight: 800;
-    color: #ffffff;
-    letter-spacing: -0.5px;
-  }
- 
-  .hero-stat-val span { color: #33d6f5; }
- 
-  .hero-stat-label {
-    font-size: 11.5px;
-    color: rgba(255,255,255,0.55);
-    margin-top: 2px;
-    letter-spacing: 0.02em;
-  }
- 
-  /* ── PAGE HEADER (interior pages) ── */
-  .page-header {
-    background: var(--navy);
-    padding: 140px 5% 64px;
-    position: relative;
-    overflow: hidden;
-  }
- 
-  .page-header-bg {
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(33,150,243,0.035) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(33,150,243,0.035) 1px, transparent 1px);
-    background-size: 48px 48px;
-  }
- 
-  .page-header-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    position: relative;
-    z-index: 1;
-  }
- 
-  .page-header .hero-eyebrow { margin-bottom: 16px; }
- 
-  .page-header h1 {
-    font-family: var(--font-display);
-    font-size: clamp(30px, 4.5vw, 50px);
-    font-weight: 800;
-    color: #ffffff;
-    letter-spacing: -1px;
-    line-height: 1.15;
-    margin-bottom: 16px;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.25);
-  }
- 
-  .page-header p {
-    font-size: 16px;
-    color: rgba(255,255,255,0.72);
-    max-width: 580px;
-    line-height: 1.75;
-  }
- 
-  /* ── SECTION COMMON ── */
+
+  .hero { min-height: 94vh; background: radial-gradient(ellipse 80% 60% at 70% 20%, rgba(0,200,240,0.12), transparent), radial-gradient(ellipse 60% 50% at 20% 90%, rgba(0,229,195,0.07), transparent), linear-gradient(160deg, var(--navy) 0%, var(--navy-2) 60%, #083152 100%); display: flex; flex-direction: column; justify-content: center; padding: 140px 5% 0; position: relative; overflow: hidden; }
+  .tech-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(0,200,240,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0,200,240,0.05) 1px, transparent 1px); background-size: 44px 44px; animation: gridDrift 24s linear infinite; }
+  @keyframes gridDrift { from { background-position: 0 0; } to { background-position: 44px 44px; } }
+  .tech-scanline { position: absolute; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, rgba(0,200,240,0.35), transparent); animation: scan 7s ease-in-out infinite; pointer-events: none; }
+  @keyframes scan { 0%, 100% { top: 15%; opacity: 0; } 10% { opacity: 1; } 50% { top: 85%; opacity: 1; } 60% { opacity: 0; } }
+  .hero-inner { max-width: 1240px; margin: 0 auto; width: 100%; position: relative; z-index: 1; }
+  .hero-eyebrow { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-mono); font-size: 11.5px; font-weight: 500; color: var(--accent); letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 26px; padding: 7px 14px; border: 1px solid rgba(0,200,240,0.3); border-radius: 4px; background: rgba(0,200,240,0.06); }
+  .pulse-dot { width: 7px; height: 7px; background: var(--teal); border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
+  @keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(0,229,195,0.5); } 50% { box-shadow: 0 0 0 7px rgba(0,229,195,0); } }
+  .hero h1 { font-family: var(--font-display); font-size: clamp(38px, 5.6vw, 70px); font-weight: 800; color: #fff; line-height: 1.08; letter-spacing: -1.4px; max-width: 840px; margin-bottom: 26px; text-shadow: 0 2px 8px rgba(0,0,0,0.35); }
+  .hero h1 em { font-style: normal; color: var(--accent); }
+  .hero-sub { font-size: 17px; color: rgba(255,255,255,0.8); max-width: 620px; line-height: 1.75; margin-bottom: 40px; }
+  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 60px; }
+  .btn-primary { background: var(--accent); color: #021724; font-size: 14px; font-weight: 600; padding: 13px 28px; border-radius: var(--radius); border: none; cursor: pointer; text-decoration: none; display: inline-block; transition: all var(--transition); box-shadow: 0 0 24px rgba(0,200,240,0.25); }
+  .btn-primary:hover { background: #33d6f5; transform: translateY(-2px); box-shadow: 0 0 36px rgba(0,200,240,0.4); }
+  .btn-outline { background: transparent; color: rgba(255,255,255,0.92); font-size: 14px; font-weight: 500; padding: 13px 28px; border-radius: var(--radius); border: 1px solid rgba(255,255,255,0.3); cursor: pointer; text-decoration: none; display: inline-block; transition: all var(--transition); }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+  .hero-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: rgba(0,200,240,0.15); border-radius: var(--radius-lg) var(--radius-lg) 0 0; overflow: hidden; max-width: 860px; border: 1px solid rgba(0,200,240,0.2); border-bottom: none; }
+  .hero-stat { background: rgba(3,15,33,0.78); padding: 22px 24px; text-align: center; position: relative; }
+  .hero-stat::after { content: ''; position: absolute; top: 0; left: 20%; right: 20%; height: 2px; background: linear-gradient(90deg, transparent, var(--accent), transparent); opacity: 0.5; }
+  .hero-stat-val { font-family: var(--font-mono); font-size: 26px; font-weight: 500; color: #fff; letter-spacing: -0.5px; }
+  .hero-stat-val span { color: var(--accent); }
+  .hero-stat-label { font-size: 11.5px; color: rgba(255,255,255,0.55); margin-top: 4px; }
+
+  .ekg-band { position: relative; z-index: 1; max-width: 1240px; margin: 0 auto; width: 100%; overflow: hidden; padding: 6px 0 28px; }
+  .ekg-svg { width: 100%; height: 60px; display: block; }
+  .ekg-path { fill: none; stroke: var(--teal); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 0 6px rgba(0,229,195,0.7)); stroke-dasharray: 1200; stroke-dashoffset: 1200; animation: ekgDraw 4.5s linear infinite; }
+  @keyframes ekgDraw { 0% { stroke-dashoffset: 1200; opacity: 1; } 70% { stroke-dashoffset: 0; opacity: 1; } 85% { opacity: 0; } 100% { stroke-dashoffset: 0; opacity: 0; } }
+
+  .page-header { background: radial-gradient(ellipse 80% 60% at 70% 20%, rgba(0,200,240,0.1), transparent), linear-gradient(160deg, var(--navy) 0%, var(--navy-2) 60%, #083152 100%); padding: 150px 5% 68px; position: relative; overflow: hidden; }
+  .page-header-inner { max-width: 1240px; margin: 0 auto; position: relative; z-index: 1; }
+  .page-header .hero-eyebrow { margin-bottom: 18px; }
+  .page-header h1 { font-family: var(--font-display); font-size: clamp(30px, 4.5vw, 52px); font-weight: 800; color: #fff; letter-spacing: -1px; line-height: 1.12; margin-bottom: 16px; text-shadow: 0 2px 8px rgba(0,0,0,0.35); }
+  .page-header p { font-size: 16px; color: rgba(255,255,255,0.75); max-width: 620px; line-height: 1.75; }
+
   section { padding: 88px 5%; }
- 
-  .section-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
- 
-  .section-eyebrow {
-    font-size: 11.5px;
-    font-weight: 700;
-    color: var(--blue-bright);
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    margin-bottom: 12px;
-  }
- 
-  .section-title {
-    font-family: var(--font-display);
-    font-size: clamp(26px, 3.5vw, 40px);
-    font-weight: 800;
-    color: var(--text-primary);
-    letter-spacing: -0.8px;
-    line-height: 1.15;
-    margin-bottom: 14px;
-  }
- 
-  .section-sub {
-    font-size: 16px;
-    color: var(--text-secondary);
-    max-width: 560px;
-    line-height: 1.75;
-    margin-bottom: 52px;
-  }
- 
-  /* ── HOME: ABOUT CONTENT ── */
-  .about-lead {
-    font-size: 19px;
-    color: var(--text-primary);
-    line-height: 1.8;
-    max-width: 800px;
-    font-weight: 400;
-  }
- 
+  .section-inner { max-width: 1240px; margin: 0 auto; }
+  .section-eyebrow { font-family: var(--font-mono); font-size: 11px; font-weight: 500; color: var(--blue-bright); letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+  .section-eyebrow::before { content: ''; width: 20px; height: 2px; background: var(--accent); }
+  .section-title { font-family: var(--font-display); font-size: clamp(26px, 3.5vw, 40px); font-weight: 800; color: var(--text-primary); letter-spacing: -0.8px; line-height: 1.15; margin-bottom: 14px; }
+  .section-sub { font-size: 16px; color: var(--text-secondary); max-width: 600px; line-height: 1.75; margin-bottom: 52px; }
+
+  .audience-band { background: var(--off-white); }
+  .audience-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .audience-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 38px 34px; position: relative; overflow: hidden; transition: all var(--transition); }
+  .audience-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--blue-bright), var(--teal)); }
+  .audience-card:hover { transform: translateY(-4px); box-shadow: 0 18px 48px rgba(10,79,143,0.13); border-color: var(--blue-bright); }
+  .audience-tag { font-family: var(--font-mono); font-size: 11px; color: var(--accent-dark); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 16px; display: block; }
+  .audience-card h3 { font-family: var(--font-display); font-size: 22px; font-weight: 800; color: var(--text-primary); letter-spacing: -0.4px; margin-bottom: 14px; }
+  .audience-card > p { font-size: 14.5px; color: var(--text-secondary); line-height: 1.8; margin-bottom: 20px; }
+  .audience-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 26px; }
+  .audience-list li { font-size: 13.5px; color: var(--text-secondary); display: flex; gap: 10px; align-items: flex-start; line-height: 1.6; }
+  .audience-list li::before { content: ''; width: 6px; height: 6px; background: var(--teal); border-radius: 50%; margin-top: 7px; flex-shrink: 0; box-shadow: 0 0 8px rgba(0,229,195,0.6); }
+  .audience-cta { font-size: 13.5px; font-weight: 600; color: var(--blue-mid); cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: gap var(--transition); }
+  .audience-cta:hover { gap: 10px; }
+
+  .milestones { background: var(--navy); position: relative; overflow: hidden; }
+  .milestones .section-title { color: white; }
+  .milestones .section-sub { color: rgba(255,255,255,0.62); }
+  .milestone-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; position: relative; z-index: 1; }
+  .milestone { background: rgba(255,255,255,0.04); border: 1px solid rgba(0,200,240,0.16); border-radius: var(--radius-lg); padding: 26px 22px; transition: all var(--transition); }
+  .milestone:hover { border-color: rgba(0,229,195,0.5); background: rgba(0,229,195,0.04); }
+  .milestone-badge { font-family: var(--font-mono); font-size: 10.5px; color: var(--teal); letter-spacing: 0.12em; text-transform: uppercase; padding: 5px 10px; border: 1px solid rgba(0,229,195,0.3); border-radius: 4px; display: inline-block; margin-bottom: 16px; background: rgba(0,229,195,0.06); }
+  .milestone h3 { font-family: var(--font-display); font-size: 17px; font-weight: 700; color: white; margin-bottom: 8px; line-height: 1.35; }
+  .milestone p { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.7; }
+
+  .tech-frame { position: relative; border-radius: var(--radius-lg); overflow: hidden; background: var(--navy); }
+  .tech-frame img { width: 100%; display: block; border-radius: var(--radius-lg); }
+  .tech-frame::before, .tech-frame::after { content: ''; position: absolute; width: 28px; height: 28px; border: 2px solid var(--accent); z-index: 2; pointer-events: none; }
+  .tech-frame::before { top: 12px; left: 12px; border-right: none; border-bottom: none; border-radius: 4px 0 0 0; }
+  .tech-frame::after { bottom: 12px; right: 12px; border-left: none; border-top: none; border-radius: 0 0 4px 0; }
+  .frame-caption { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 10px; display: flex; align-items: center; gap: 7px; }
+  .frame-caption::before { content: ''; width: 6px; height: 6px; background: var(--teal); border-radius: 50%; }
+
+  .img-placeholder { background: linear-gradient(rgba(0,200,240,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,200,240,0.04) 1px, transparent 1px), linear-gradient(150deg, var(--navy-2), #0a3a63); background-size: 28px 28px, 28px 28px, 100% 100%; border-radius: var(--radius-lg); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; color: rgba(255,255,255,0.55); min-height: 240px; position: relative; overflow: hidden; }
+  .img-placeholder::before, .img-placeholder::after { content: ''; position: absolute; width: 24px; height: 24px; border: 2px solid rgba(0,200,240,0.5); }
+  .img-placeholder::before { top: 12px; left: 12px; border-right: none; border-bottom: none; }
+  .img-placeholder::after { bottom: 12px; right: 12px; border-left: none; border-top: none; }
+  .img-placeholder svg { width: 30px; height: 30px; stroke: rgba(0,200,240,0.6); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+  .img-placeholder span { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; }
+
+  .about-split { display: grid; grid-template-columns: 1.05fr 1fr; gap: 56px; align-items: center; }
+  .about-lead { font-size: 18px; color: var(--text-primary); line-height: 1.8; }
   .about-lead strong { font-weight: 600; }
- 
-  .about-body {
-    font-size: 15.5px;
-    color: var(--text-secondary);
-    line-height: 1.85;
-    max-width: 800px;
-    margin-top: 22px;
-  }
- 
-  .values-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    margin-top: 56px;
-  }
- 
-  .value-card {
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 28px 24px;
-    transition: border-color var(--transition), transform var(--transition);
-    background: var(--white);
-  }
- 
-  .value-card:hover { border-color: var(--blue-bright); transform: translateY(-3px); }
- 
-  .value-icon {
-    width: 44px;
-    height: 44px;
-    border-radius: var(--radius-sm);
-    background: var(--blue-light);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 18px;
-  }
- 
+  .about-body { font-size: 15px; color: var(--text-secondary); line-height: 1.85; margin-top: 20px; }
+
+  .process-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+  .process-step { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px 18px; transition: all var(--transition); }
+  .process-step:hover { border-color: var(--blue-bright); box-shadow: 0 10px 28px rgba(10,79,143,0.09); }
+  .process-num { font-family: var(--font-mono); font-size: 11px; color: var(--accent-dark); letter-spacing: 0.1em; margin-bottom: 14px; }
+  .process-step h3 { font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; }
+  .process-step p { font-size: 12.5px; color: var(--text-secondary); line-height: 1.65; }
+
+  .value-icon { width: 44px; height: 44px; border-radius: var(--radius-sm); background: var(--blue-light); display: flex; align-items: center; justify-content: center; margin-bottom: 18px; }
   .value-icon svg { width: 22px; height: 22px; stroke: var(--blue-mid); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
- 
-  .value-card h3 {
-    font-family: var(--font-display);
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--text-primary);
-    margin-bottom: 10px;
-  }
- 
-  .value-card p {
-    font-size: 13.5px;
-    color: var(--text-secondary);
-    line-height: 1.7;
-  }
- 
-  .home-sectors {
-    background: var(--off-white);
-  }
- 
-  .sector-row {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 14px;
-  }
- 
-  .sector-tile {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 24px 20px;
-    text-align: center;
-    transition: border-color var(--transition), transform var(--transition);
-    cursor: pointer;
-    text-decoration: none;
-    display: block;
-  }
- 
-  .sector-tile:hover { border-color: var(--blue-bright); transform: translateY(-3px); }
- 
+
+  .sector-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .sector-tile { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 26px 20px; text-align: center; transition: all var(--transition); cursor: pointer; text-decoration: none; display: block; position: relative; overflow: hidden; }
+  .sector-tile::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--blue-bright), var(--teal)); transform: scaleX(0); transition: transform 0.3s ease; }
+  .sector-tile:hover::before { transform: scaleX(1); }
+  .sector-tile:hover { border-color: var(--blue-bright); transform: translateY(-3px); box-shadow: 0 12px 32px rgba(10,79,143,0.1); }
   .sector-tile .value-icon { margin: 0 auto 14px; }
- 
-  .sector-tile h3 {
-    font-family: var(--font-display);
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--text-primary);
-    margin-bottom: 6px;
-  }
- 
-  .sector-tile p {
-    font-size: 12.5px;
-    color: var(--text-muted);
-    line-height: 1.6;
-  }
- 
-  /* ── IMAGE PLACEHOLDER ── */
-  .img-placeholder {
-    background: linear-gradient(135deg, var(--blue-xlight) 0%, var(--blue-light) 100%);
-    border: 2px dashed var(--border-strong);
-    border-radius: var(--radius-lg);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    color: var(--text-muted);
-    min-height: 220px;
-  }
- 
-  .img-placeholder svg { width: 32px; height: 32px; stroke: var(--text-muted); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; opacity: 0.6; }
- 
-  .img-placeholder span { font-size: 12px; font-weight: 500; letter-spacing: 0.04em; }
- 
-  /* ── REAL ESTATE PAGE ── */
-  .re-item {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 48px;
-    align-items: center;
-    padding: 48px 0;
-    border-bottom: 1px solid var(--border);
-  }
- 
+  .sector-tile h3 { font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
+  .sector-tile p { font-size: 12.5px; color: var(--text-muted); line-height: 1.6; }
+
+  .re-item { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; padding: 48px 0; border-bottom: 1px solid var(--border); }
   .re-item:last-child { border-bottom: none; }
- 
   .re-item:nth-child(even) .re-visual { order: 2; }
- 
-  .re-text h3 {
-    font-family: var(--font-display);
-    font-size: 24px;
-    font-weight: 800;
-    color: var(--text-primary);
-    letter-spacing: -0.4px;
-    margin-bottom: 14px;
-  }
- 
-  .re-text p {
-    font-size: 15px;
-    color: var(--text-secondary);
-    line-height: 1.8;
-    margin-bottom: 18px;
-  }
- 
-  .re-features {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 7px;
-  }
- 
-  .feature-tag {
-    font-size: 12px;
-    color: var(--blue-mid);
-    background: var(--blue-light);
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-weight: 500;
-  }
- 
-  /* ── SERVICES PAGE ── */
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-  }
- 
-  .service-card {
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 30px 26px;
-    transition: border-color var(--transition), transform var(--transition);
-    background: var(--white);
-  }
- 
-  .service-card:hover { border-color: var(--blue-bright); transform: translateY(-3px); }
- 
-  .service-card h3 {
-    font-family: var(--font-display);
-    font-size: 16.5px;
-    font-weight: 700;
-    color: var(--text-primary);
-    margin-bottom: 10px;
-  }
- 
-  .service-card p {
-    font-size: 13.5px;
-    color: var(--text-secondary);
-    line-height: 1.75;
-  }
- 
-  /* ── INVESTMENTS PAGE ── */
-  .invest-principles {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-  }
- 
-  .principle {
-    display: flex;
-    gap: 18px;
-    align-items: flex-start;
-    padding: 24px;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    transition: border-color var(--transition), background var(--transition);
-    background: var(--white);
-  }
- 
+  .re-text h3 { font-family: var(--font-display); font-size: 24px; font-weight: 800; color: var(--text-primary); letter-spacing: -0.4px; margin-bottom: 14px; }
+  .re-text p { font-size: 15px; color: var(--text-secondary); line-height: 1.8; margin-bottom: 18px; }
+  .re-features { display: flex; flex-wrap: wrap; gap: 7px; }
+  .feature-tag { font-family: var(--font-mono); font-size: 11px; color: var(--blue-mid); background: var(--blue-light); padding: 5px 12px; border-radius: 4px; font-weight: 500; letter-spacing: 0.03em; }
+
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .service-card { border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 30px 26px; transition: all var(--transition); background: var(--white); position: relative; overflow: hidden; }
+  .service-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--blue-bright), var(--teal)); transform: scaleX(0); transition: transform 0.3s ease; }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-card:hover { border-color: var(--blue-bright); transform: translateY(-3px); box-shadow: 0 12px 32px rgba(10,79,143,0.1); }
+  .service-card h3 { font-family: var(--font-display); font-size: 16.5px; font-weight: 700; color: var(--text-primary); margin-bottom: 10px; }
+  .service-card p { font-size: 13.5px; color: var(--text-secondary); line-height: 1.75; }
+
+  .invest-principles { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .principle { display: flex; gap: 18px; align-items: flex-start; padding: 24px; border: 1px solid var(--border); border-radius: var(--radius-lg); transition: all var(--transition); background: var(--white); }
   .principle:hover { border-color: var(--blue-bright); background: var(--blue-xlight); }
- 
-  .principle-num {
-    font-family: var(--font-display);
-    font-size: 24px;
-    font-weight: 800;
-    color: var(--blue-light);
-    width: 40px;
-    flex-shrink: 0;
-    line-height: 1;
-  }
- 
-  .principle h4 {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin-bottom: 6px;
-  }
- 
-  .principle p {
-    font-size: 13.5px;
-    color: var(--text-secondary);
-    line-height: 1.7;
-  }
- 
-  /* ── DEVELOPMENTS PAGE ── */
-  .dev-timeline {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-  }
- 
-  .dev-timeline::before {
-    content: '';
-    position: absolute;
-    left: 22px;
-    top: 12px;
-    bottom: 12px;
-    width: 2px;
-    background: linear-gradient(to bottom, var(--blue-bright), var(--accent));
-    border-radius: 2px;
-  }
- 
-  .dev-item {
-    display: flex;
-    gap: 24px;
-    padding: 0 0 40px 0;
-    position: relative;
-  }
- 
+  .principle-num { font-family: var(--font-mono); font-size: 13px; font-weight: 500; color: var(--accent-dark); padding: 4px 8px; background: rgba(0,200,240,0.1); border-radius: 4px; flex-shrink: 0; }
+  .principle h4 { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+  .principle p { font-size: 13.5px; color: var(--text-secondary); line-height: 1.7; }
+
+  .dev-timeline { display: flex; flex-direction: column; position: relative; }
+  .dev-timeline::before { content: ''; position: absolute; left: 22px; top: 12px; bottom: 12px; width: 2px; background: linear-gradient(to bottom, var(--blue-bright), var(--teal)); }
+  .dev-item { display: flex; gap: 24px; padding: 0 0 40px 0; position: relative; }
   .dev-item:last-child { padding-bottom: 0; }
- 
-  .dev-dot {
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
-    background: var(--white);
-    border: 2px solid var(--blue-bright);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    position: relative;
-    z-index: 1;
-  }
- 
+  .dev-dot { width: 46px; height: 46px; border-radius: 50%; background: var(--white); border: 2px solid var(--blue-bright); display: flex; align-items: center; justify-content: center; flex-shrink: 0; position: relative; z-index: 1; box-shadow: 0 0 16px rgba(33,150,243,0.3); }
   .dev-dot svg { width: 20px; height: 20px; stroke: var(--blue-mid); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
- 
-  .dev-content {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 26px;
-    flex: 1;
-    transition: border-color var(--transition);
-  }
- 
+  .dev-content { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 26px; flex: 1; transition: border-color var(--transition); }
   .dev-content:hover { border-color: var(--blue-bright); }
- 
-  .dev-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 10px;
-  }
- 
-  .dev-content h3 {
-    font-family: var(--font-display);
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--text-primary);
-  }
- 
-  .dev-status {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 4px 10px;
-    border-radius: 20px;
-  }
- 
+  .dev-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 10px; }
+  .dev-content h3 { font-family: var(--font-display); font-size: 18px; font-weight: 700; }
+  .dev-status { font-family: var(--font-mono); font-size: 10.5px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 11px; border-radius: 4px; }
   .status-active { background: #e0f7ef; color: #0f6e56; }
   .status-progress { background: #fff3cd; color: #856404; }
- 
-  .dev-content p {
-    font-size: 14px;
-    color: var(--text-secondary);
-    line-height: 1.75;
-    margin-bottom: 16px;
-  }
- 
-  .dev-img { margin-top: 4px; }
-  .dev-img .img-placeholder { min-height: 180px; }
- 
-  /* ── CONTACT PAGE ── */
-  .contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 56px;
-    align-items: start;
-  }
- 
+  .dev-content p { font-size: 14px; color: var(--text-secondary); line-height: 1.75; margin-bottom: 16px; }
+  .dev-img .img-placeholder { min-height: 190px; }
+
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
   .contact-info { display: flex; flex-direction: column; gap: 22px; }
- 
-  .contact-item {
-    display: flex;
-    gap: 16px;
-    align-items: flex-start;
-  }
- 
-  .contact-icon-wrap {
-    width: 44px;
-    height: 44px;
-    border-radius: var(--radius);
-    background: var(--blue-light);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
- 
+  .contact-item { display: flex; gap: 16px; align-items: flex-start; }
+  .contact-icon-wrap { width: 44px; height: 44px; border-radius: var(--radius); background: var(--blue-light); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
   .contact-icon-wrap svg { width: 20px; height: 20px; stroke: var(--blue-mid); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
- 
-  .contact-item h4 {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.07em;
-    margin-bottom: 3px;
-  }
- 
-  .contact-item p {
-    font-size: 15px;
-    color: var(--text-primary);
-    line-height: 1.5;
-  }
- 
-  .contact-form {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-xl);
-    padding: 36px;
-  }
- 
-  .contact-form h3 {
-    font-family: var(--font-display);
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--text-primary);
-    margin-bottom: 22px;
-  }
- 
+  .contact-item h4 { font-family: var(--font-mono); font-size: 11px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 3px; }
+  .contact-item p { font-size: 15px; line-height: 1.5; }
+  .contact-form { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 36px; box-shadow: 0 12px 40px rgba(10,79,143,0.06); }
+  .contact-form h3 { font-family: var(--font-display); font-size: 20px; font-weight: 700; margin-bottom: 22px; }
   .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
- 
   .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
- 
-  .form-group label {
-    font-size: 12.5px;
-    font-weight: 600;
-    color: var(--text-secondary);
-    letter-spacing: 0.03em;
-  }
- 
-  .form-group input,
-  .form-group textarea,
-  .form-group select {
-    padding: 11px 14px;
-    border: 1px solid var(--border-strong);
-    border-radius: var(--radius);
-    font-family: var(--font-body);
-    font-size: 14px;
-    color: var(--text-primary);
-    outline: none;
-    background: var(--white);
-    transition: border-color var(--transition);
-    width: 100%;
-  }
- 
-  .form-group input:focus,
-  .form-group textarea:focus,
-  .form-group select:focus { border-color: var(--blue-bright); }
- 
+  .form-group label { font-size: 12.5px; font-weight: 600; color: var(--text-secondary); }
+  .form-group input, .form-group textarea, .form-group select { padding: 11px 14px; border: 1px solid var(--border-strong); border-radius: var(--radius); font-family: var(--font-body); font-size: 14px; outline: none; background: var(--white); transition: all var(--transition); width: 100%; }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--blue-bright); box-shadow: 0 0 0 3px rgba(33,150,243,0.12); }
   .form-group textarea { height: 100px; resize: none; }
- 
-  .form-submit {
-    background: var(--blue-mid);
-    color: white;
-    font-family: var(--font-body);
-    font-size: 14px;
-    font-weight: 600;
-    padding: 13px;
-    border-radius: var(--radius);
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    transition: all var(--transition);
-  }
- 
-  .form-submit:hover { background: var(--navy); transform: translateY(-1px); }
- 
-  /* ── FOOTER ── */
-  footer {
-    background: var(--navy);
-    padding: 56px 5% 32px;
-    border-top: 1px solid rgba(255,255,255,0.06);
-  }
- 
-  .footer-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
- 
-  .footer-top {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 48px;
-    margin-bottom: 48px;
-  }
- 
-  .footer-brand-logo {
-    font-family: var(--font-display);
-    font-size: 22px;
-    font-weight: 800;
-    color: white;
-    margin-bottom: 12px;
-    letter-spacing: -0.5px;
-  }
- 
-  .footer-brand-logo span { color: var(--accent); }
- 
-  .footer-brand p {
-    font-size: 13.5px;
-    color: rgba(255,255,255,0.45);
-    line-height: 1.75;
-    max-width: 280px;
-    margin-bottom: 20px;
-  }
- 
-  .footer-contact-line {
-    font-size: 13px;
-    color: rgba(255,255,255,0.55);
-    margin-bottom: 5px;
-    display: flex;
-    align-items: center;
-    gap: 7px;
-  }
- 
+  .form-submit { background: var(--blue-mid); color: white; font-size: 14px; font-weight: 600; padding: 13px; border-radius: var(--radius); border: none; cursor: pointer; width: 100%; transition: all var(--transition); }
+  .form-submit:hover { background: var(--navy-2); }
+
+  footer { background: var(--navy); padding: 56px 5% 32px; border-top: 2px solid rgba(0,200,240,0.25); }
+  .footer-inner { max-width: 1240px; margin: 0 auto; }
+  .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+  .footer-logo-chip { display: inline-block; background: white; border-radius: var(--radius); padding: 10px 16px; margin-bottom: 16px; }
+  .footer-logo-chip img { height: 36px; width: auto; display: block; }
+  .footer-brand p { font-size: 13.5px; color: rgba(255,255,255,0.45); line-height: 1.75; max-width: 300px; margin-bottom: 20px; }
+  .footer-contact-line { font-size: 13px; color: rgba(255,255,255,0.55); margin-bottom: 5px; display: flex; align-items: center; gap: 7px; }
   .footer-contact-line svg { width: 14px; height: 14px; stroke: var(--accent); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
- 
-  .footer-col h4 {
-    font-size: 12px;
-    font-weight: 700;
-    color: rgba(255,255,255,0.48);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: 16px;
-  }
- 
+  .footer-col h4 { font-family: var(--font-mono); font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 16px; }
   .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
- 
-  .footer-links a {
-    font-size: 13.5px;
-    color: rgba(255,255,255,0.58);
-    text-decoration: none;
-    transition: color var(--transition);
-    cursor: pointer;
+  .footer-links a { font-size: 13.5px; color: rgba(255,255,255,0.58); text-decoration: none; transition: color var(--transition); cursor: pointer; }
+  .footer-links a:hover { color: var(--accent); }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.07); padding-top: 24px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .footer-bottom p { font-size: 12.5px; color: rgba(255,255,255,0.32); }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.75s cubic-bezier(0.16,1,0.3,1); will-change: opacity, transform; }
+  .reveal.in-view { opacity: 1; transform: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+    .tech-grid, .tech-scanline, .ekg-path, .pulse-dot { animation: none !important; }
   }
- 
-  .footer-links a:hover { color: white; }
- 
-  .footer-bottom {
-    border-top: 1px solid rgba(255,255,255,0.07);
-    padding-top: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
- 
-  .footer-bottom p {
-    font-size: 12.5px;
-    color: rgba(255,255,255,0.32);
-  }
- 
-  /* ── MOBILE ── */
+
   @media (max-width: 768px) {
     .nav-links { display: none; }
-    .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; background: rgba(4,38,74,0.98); padding: 20px 5%; gap: 4px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 68px; left: 0; right: 0; background: rgba(255,255,255,0.98); padding: 20px 5%; gap: 4px; border-bottom: 1px solid var(--border); }
     .nav-links.open a { padding: 10px 0; }
     .hamburger { display: flex; }
     .hero-stats { grid-template-columns: repeat(2, 1fr); }
-    .values-grid, .services-grid { grid-template-columns: 1fr; }
-    .sector-row { grid-template-columns: 1fr 1fr; }
-    .re-item { grid-template-columns: 1fr; gap: 24px; }
+    .services-grid, .milestone-grid { grid-template-columns: 1fr; }
+    .sector-row, .process-row { grid-template-columns: 1fr 1fr; }
+    .about-split, .re-item, .invest-principles, .contact-grid, .audience-grid { grid-template-columns: 1fr; gap: 28px; }
     .re-item:nth-child(even) .re-visual { order: 0; }
-    .invest-principles, .contact-grid { grid-template-columns: 1fr; }
     .footer-top { grid-template-columns: 1fr 1fr; }
     .form-row { grid-template-columns: 1fr; }
     .hero-actions { flex-direction: column; }
     .btn-primary, .btn-outline { text-align: center; }
     section { padding: 60px 5%; }
-    .page-header { padding: 110px 5% 48px; }
+    .page-header { padding: 116px 5% 48px; }
   }
- 
+
   @media (max-width: 480px) {
-    .sector-row { grid-template-columns: 1fr; }
+    .sector-row, .process-row { grid-template-columns: 1fr; }
     .footer-top { grid-template-columns: 1fr; }
   }
 </style>
 </head>
 <body>
- 
-<!-- NAV -->
+
 <nav>
   <div class="nav-inner">
-    <a class="nav-logo" onclick="showPage('home')">AMD<span>Global</span></a>
+    <a class="nav-logo" onclick="showPage('home')"><img src="logo.png" alt="AMD Global"></a>
     <ul class="nav-links" id="navLinks">
       <li><a data-page="home" class="active" onclick="showPage('home')">About us</a></li>
       <li><a data-page="realestate" onclick="showPage('realestate')">Real estate</a></li>
@@ -905,507 +260,416 @@ Index · HTML
       <li><a data-page="developments" onclick="showPage('developments')">Developments</a></li>
       <li><a data-page="contact" onclick="showPage('contact')">Contact</a></li>
     </ul>
-    <div class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Open menu">
-      <span></span><span></span><span></span>
-    </div>
+    <div class="hamburger" onclick="toggleMenu()" aria-label="Open menu"><span></span><span></span><span></span></div>
   </div>
 </nav>
- 
-<!-- ═══════════ PAGE: HOME / ABOUT US ═══════════ -->
+
+<!-- ═══ HOME ═══ -->
 <div class="page active" id="page-home">
- 
+
   <div class="hero">
-    <div class="hero-grid-bg"></div>
+    <div class="tech-grid"></div>
+    <div class="tech-scanline"></div>
     <div class="hero-inner">
-      <div class="hero-eyebrow">Houston, Texas</div>
-      <h1>A development firm built on <em>diversified strength</em></h1>
-      <p class="hero-sub">AMD Global is a Houston-based development firm with a broad portfolio of assets in healthcare, commercial real estate, energy, and occupational care.</p>
+      <div class="hero-eyebrow"><span class="pulse-dot"></span>Physician-centric healthcare development · Houston, TX</div>
+      <h1>Physician-built. Developer-proven. <em>The future of healthcare.</em></h1>
+      <p class="hero-sub">AMD Global is a physician-centric development firm that designs, builds, and operates next-generation healthcare infrastructure. Founded by physicians who develop — we understand what clinicians need and what investors expect, because we've delivered both.</p>
       <div class="hero-actions">
-        <a class="btn-primary" onclick="showPage('realestate')">Explore our real estate</a>
-        <a class="btn-outline" onclick="showPage('contact')">Contact us</a>
+        <a class="btn-primary" onclick="showPage('developments')">See what we've built</a>
+        <a class="btn-outline" onclick="showPage('contact')">Develop with us</a>
       </div>
       <div class="hero-stats">
-        <div class="hero-stat">
-          <div class="hero-stat-val">4</div>
-          <div class="hero-stat-label">Diversified sectors</div>
-        </div>
-        <div class="hero-stat">
-          <div class="hero-stat-val">Full<span>-service</span></div>
-          <div class="hero-stat-label">Development management</div>
-        </div>
-        <div class="hero-stat">
-          <div class="hero-stat-val">24<span>/7</span></div>
-          <div class="hero-stat-label">Facility operations</div>
-        </div>
-        <div class="hero-stat">
-          <div class="hero-stat-val">2018</div>
-          <div class="hero-stat-label">First licensed hospital</div>
-        </div>
+        <div class="hero-stat"><div class="hero-stat-val"><span>1st</span></div><div class="hero-stat-label">Free-standing emergency center</div></div>
+        <div class="hero-stat"><div class="hero-stat-val"><span>1st</span></div><div class="hero-stat-label">Micro-hospital developed</div></div>
+        <div class="hero-stat"><div class="hero-stat-val">Class <span>A</span></div><div class="hero-stat-label">Hedwig Place office development</div></div>
+        <div class="hero-stat"><div class="hero-stat-val" data-count="2018">0</div><div class="hero-stat-label">Flagship hospital licensed</div></div>
       </div>
     </div>
+    <div class="ekg-band">
+      <svg class="ekg-svg" viewBox="0 0 1200 60" preserveAspectRatio="none">
+        <path class="ekg-path" d="M0,30 L150,30 L170,30 L185,12 L200,48 L215,8 L230,42 L245,30 L400,30 L420,30 L435,14 L450,46 L465,10 L480,40 L495,30 L700,30 L720,30 L735,12 L750,48 L765,8 L780,42 L795,30 L1000,30 L1020,30 L1035,14 L1050,46 L1065,10 L1080,40 L1095,30 L1200,30"/>
+      </svg>
+    </div>
   </div>
- 
-  <section>
+
+  <section class="audience-band">
     <div class="section-inner">
-      <div class="section-eyebrow">Who we are</div>
-      <h2 class="section-title">About AMD Global</h2>
-      <p class="about-lead">AMD Global offers <strong>full-service development management and investment services</strong> for partners and third-party investors, providing exposure to distinct opportunities in diversified sectors while operating to the very highest ethical, moral, and qualitative standards.</p>
-      <p class="about-body">From conception to implementation, AMD's assortment of projects maintains a unified message of social responsibility while preserving maximum value. Our portfolio spans healthcare facilities, commercial real estate, energy assets, and occupational care — each developed and managed with the same commitment to community impact and operational excellence.</p>
- 
-      <div class="values-grid">
-        <div class="value-card">
-          <div class="value-icon">
-            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          </div>
-          <h3>Highest ethical standards</h3>
-          <p>Every project operates to the very highest ethical, moral, and qualitative standards — from conception to implementation.</p>
+      <div class="section-eyebrow">Who we serve</div>
+      <h2 class="section-title">Built for physicians. Structured for investors.</h2>
+      <p class="section-sub">AMD Global sits at the intersection of medicine and development — a rare combination that lets us speak both languages fluently.</p>
+      <div class="audience-grid">
+        <div class="audience-card">
+          <span class="audience-tag">// For physicians</span>
+          <h3>Your practice. Your facility. Developed by physicians.</h3>
+          <p>You know what your patients need — we know how to build it. AMD partners with physicians and physician groups who want to develop their own facilities, from free-standing emergency centers to full hospitals.</p>
+          <ul class="audience-list">
+            <li>Physician-led design — clinical workflows built in from day one</li>
+            <li>Full development management: site, design, construction, licensing</li>
+            <li>Turnkey operations support after opening: billing, EHR, staffing</li>
+          </ul>
+          <span class="audience-cta" onclick="showPage('contact')">Start a development conversation →</span>
         </div>
-        <div class="value-card">
-          <div class="value-icon">
-            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
-          </div>
-          <h3>Social responsibility</h3>
-          <p>Our projects maintain a unified message of social responsibility — building infrastructure that communities genuinely rely on.</p>
-        </div>
-        <div class="value-card">
-          <div class="value-icon">
-            <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-          </div>
-          <h3>Maximum value</h3>
-          <p>Disciplined development and management practices that preserve maximum value across every asset in our portfolio.</p>
+        <div class="audience-card">
+          <span class="audience-tag">// For investors & developers</span>
+          <h3>Proven healthcare assets with operational depth.</h3>
+          <p>Healthcare infrastructure is one of the most resilient asset classes in the market — and AMD is a vertically integrated operator with a track record of delivering and running facilities that perform.</p>
+          <ul class="audience-list">
+            <li>Completed, operational developments — not just plans</li>
+            <li>Vertically integrated: development, management, and operations under one roof</li>
+            <li>Diversified exposure across healthcare, commercial real estate, energy, and occupational care</li>
+          </ul>
+          <span class="audience-cta" onclick="showPage('investments')">Explore investment services →</span>
         </div>
       </div>
     </div>
   </section>
- 
-  <section class="home-sectors">
+
+  <section>
+    <div class="section-inner">
+      <div class="about-split">
+        <div>
+          <div class="section-eyebrow">Our story</div>
+          <h2 class="section-title">A history of firsts</h2>
+          <p class="about-lead">AMD Global's story is a <strong>success story of physician-driven development</strong> — a Houston-based firm that has spent years turning clinical insight into completed, operating healthcare infrastructure.</p>
+          <p class="about-body">What began as a physician-centric vision has grown into a full-service development and investment firm. Along the way, AMD pioneered new healthcare delivery formats — developing one of the first free-standing emergency centers, one of the first micro-hospitals, and Class A medical office space — while expanding into urgent care, imaging, wound care, and medical specialties. Every project since has carried the same DNA: facilities designed by people who practice medicine, built to the very highest ethical, moral, and qualitative standards.</p>
+        </div>
+        <div>
+          <!-- IMAGE SLOT: About photo. Replace placeholder with:
+               <div class="tech-frame"><img src="YOUR-IMAGE.jpg" alt="AMD Global"></div> -->
+          <div class="img-placeholder" style="min-height:320px;">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span>About image</span>
+          </div>
+          <div class="frame-caption">Image placement · about AMD Global</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="milestones">
+    <div class="tech-grid"></div>
+    <div class="section-inner" style="position:relative;z-index:1;">
+      <div class="section-eyebrow" style="color:var(--accent)">Track record</div>
+      <h2 class="section-title">What we've already delivered</h2>
+      <p class="section-sub">Trust is earned by finishing what you start. These are completed AMD developments — proof that your next project is in experienced hands.</p>
+      <div class="milestone-grid">
+        <div class="milestone">
+          <span class="milestone-badge">Pioneer</span>
+          <h3>Founded one of the first free-standing emergency centers</h3>
+          <p>An early mover in the FSEC model — bringing emergency-level care into the community, outside traditional hospital campuses.</p>
+        </div>
+        <div class="milestone">
+          <span class="milestone-badge">Pioneer</span>
+          <h3>Developed one of the first micro-hospitals — Louisiana</h3>
+          <p>A compact, full-capability hospital format engineered for faster delivery and community-scale access to inpatient care.</p>
+        </div>
+        <div class="milestone">
+          <span class="milestone-badge">Delivered</span>
+          <h3>Hedwig Place — Class A office development</h3>
+          <p>AMD's premium Class A office building, designed and delivered to institutional standards — home to physician practices, clinical services, and professional tenants.</p>
+        </div>
+        <div class="milestone">
+          <span class="milestone-badge">Operating</span>
+          <h3>Heights Hospital — licensed 2018</h3>
+          <p>AMD's flagship full-service hospital: inpatient care, oncology and infusion, wound care, sleep labs, and outpatient services.</p>
+        </div>
+        <div class="milestone">
+          <span class="milestone-badge">Expanding</span>
+          <h3>Urgent care & imaging centers</h3>
+          <p>Active expansion into rapid-access outpatient care and advanced diagnostic imaging, integrated with AMD's facility network.</p>
+        </div>
+        <div class="milestone">
+          <span class="milestone-badge">Expanding</span>
+          <h3>Wound care & medical specialties</h3>
+          <p>24/7 specialized wound care centers and a growing roster of medical specialty services staffed by board-certified physicians.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--off-white);">
+    <div class="section-inner">
+      <div class="section-eyebrow">Our core focus</div>
+      <h2 class="section-title">Healthcare development, end to end</h2>
+      <p class="section-sub">Healthcare development defines AMD Global. We control every phase of the lifecycle — faster delivery, lower risk, and facilities engineered around patient care from day one.</p>
+      <div class="process-row">
+        <div class="process-step"><div class="process-num">PHASE 01</div><h3>Site & market analysis</h3><p>Identifying high-demand communities where new healthcare infrastructure delivers the greatest impact and value.</p></div>
+        <div class="process-step"><div class="process-num">PHASE 02</div><h3>Design & engineering</h3><p>Physician-informed clinical layouts, advanced systems, and future-ready technology infrastructure.</p></div>
+        <div class="process-step"><div class="process-num">PHASE 03</div><h3>Development & construction</h3><p>Full development management from groundbreaking through commissioning, on schedule and to specification.</p></div>
+        <div class="process-step"><div class="process-num">PHASE 04</div><h3>Licensing & compliance</h3><p>Navigating healthcare licensure, regulatory approval, and accreditation to bring facilities online.</p></div>
+        <div class="process-step"><div class="process-num">PHASE 05</div><h3>Operations & management</h3><p>Ongoing facility, business office, and revenue cycle management that keeps every asset performing at its peak.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
     <div class="section-inner">
       <div class="section-eyebrow">What we do</div>
       <h2 class="section-title">Our portfolio at a glance</h2>
-      <p class="section-sub">Four diversified sectors, one unified standard of excellence.</p>
+      <p class="section-sub">Healthcare development at the core — supported by a diversified, vertically integrated portfolio.</p>
       <div class="sector-row">
         <a class="sector-tile" onclick="showPage('realestate')">
-          <div class="value-icon">
-            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-          </div>
+          <div class="value-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
           <h3>Healthcare real estate</h3>
-          <p>Hospitals, urgent care, imaging, and wound care facilities</p>
+          <p>Hospitals, emergency centers, urgent care, imaging, and wound care</p>
         </a>
         <a class="sector-tile" onclick="showPage('services')">
-          <div class="value-icon">
-            <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          </div>
+          <div class="value-icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
           <h3>Management services</h3>
           <p>Full-service operations, billing, and facility management</p>
         </a>
         <a class="sector-tile" onclick="showPage('investments')">
-          <div class="value-icon">
-            <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
-          </div>
+          <div class="value-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
           <h3>Investments</h3>
           <p>Investment services for partners and third-party investors</p>
         </a>
         <a class="sector-tile" onclick="showPage('developments')">
-          <div class="value-icon">
-            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8M8 12h8"/></svg>
-          </div>
+          <div class="value-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8M8 12h8"/></svg></div>
           <h3>Active developments</h3>
-          <p>Projects in motion across our growing portfolio</p>
+          <p>Healthcare projects in motion across our growing portfolio</p>
         </a>
       </div>
     </div>
   </section>
- 
+
 </div>
- 
-<!-- ═══════════ PAGE: REAL ESTATE ═══════════ -->
+
+<!-- ═══ REAL ESTATE ═══ -->
 <div class="page" id="page-realestate">
- 
   <div class="page-header">
-    <div class="page-header-bg"></div>
+    <div class="tech-grid"></div>
     <div class="page-header-inner">
-      <div class="hero-eyebrow">Real estate</div>
+      <div class="hero-eyebrow"><span class="pulse-dot"></span>Real estate</div>
       <h1>Healthcare real estate portfolio</h1>
-      <p>A diversified portfolio of healthcare real estate assets — developed, owned, and operated by AMD Global.</p>
+      <p>Purpose-built healthcare facilities — developed, owned, and operated by AMD Global as part of our physician-centric development mission.</p>
     </div>
   </div>
- 
   <section>
     <div class="section-inner">
- 
       <div class="re-item">
         <div class="re-visual">
-          <!-- To add a real photo, replace the div below with:
-               <img src="YOUR-IMAGE.jpg" style="width:100%;border-radius:16px;" alt="Hospital facility"> -->
-          <div class="img-placeholder">
-            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-            <span>Facility image</span>
-          </div>
+          <!-- IMAGE SLOT -->
+          <div class="img-placeholder"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Facility image</span></div>
         </div>
         <div class="re-text">
-          <h3>Hospitals</h3>
-          <p>AMD's hospital assets deliver comprehensive inpatient and outpatient care across major medical specialties. Heights Hospital in Houston has been licensed and operational since 2018 — offering internal medicine, oncology and infusion, palliative care, wound care, stress tests, sleep labs, and outpatient services, with clinical expertise spanning through highly specialized fields.</p>
-          <div class="re-features">
-            <span class="feature-tag">Inpatient care</span>
-            <span class="feature-tag">Emergency services</span>
-            <span class="feature-tag">Oncology & infusion</span>
-            <span class="feature-tag">Surgical suites</span>
-            <span class="feature-tag">Sleep labs</span>
-          </div>
+          <h3>Hospitals & micro-hospitals</h3>
+          <p>AMD's hospital developments deliver comprehensive inpatient and outpatient care across major medical specialties. Heights Hospital in Houston has been licensed and operational since 2018 — and AMD pioneered the micro-hospital format, developing one of the first in the country.</p>
+          <div class="re-features"><span class="feature-tag">Inpatient care</span><span class="feature-tag">Emergency services</span><span class="feature-tag">Oncology & infusion</span><span class="feature-tag">Surgical suites</span><span class="feature-tag">Sleep labs</span></div>
         </div>
       </div>
- 
       <div class="re-item">
         <div class="re-visual">
-          <div class="img-placeholder">
-            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-            <span>Facility image</span>
-          </div>
+          <div class="img-placeholder"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Facility image</span></div>
         </div>
         <div class="re-text">
-          <h3>Urgent care</h3>
-          <p>Modern urgent care facilities designed to serve communities with rapid, high-quality outpatient treatment. Our urgent care centers bridge the gap between primary care and emergency services — delivering shorter wait times, lower costs, and superior patient outcomes.</p>
-          <div class="re-features">
-            <span class="feature-tag">Walk-in services</span>
-            <span class="feature-tag">Rapid diagnostics</span>
-            <span class="feature-tag">Board-certified staff</span>
-          </div>
+          <h3>Free-standing emergency centers</h3>
+          <p>AMD founded one of the first free-standing emergency centers — bringing emergency-level care into communities, outside traditional hospital campuses. These facilities deliver rapid, high-acuity treatment with the accessibility patients expect.</p>
+          <div class="re-features"><span class="feature-tag">Emergency-level care</span><span class="feature-tag">Community access</span><span class="feature-tag">Rapid treatment</span></div>
         </div>
       </div>
- 
       <div class="re-item">
         <div class="re-visual">
-          <div class="img-placeholder">
-            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-            <span>Facility image</span>
-          </div>
+          <div class="img-placeholder"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Facility image</span></div>
         </div>
         <div class="re-text">
-          <h3>Imaging centers</h3>
-          <p>Advanced diagnostic imaging facilities equipped with the latest digital scanning technology and rapid turnaround capabilities. Our imaging centers integrate seamlessly with AMD's broader facility network, ensuring continuity of care from diagnosis to treatment.</p>
-          <div class="re-features">
-            <span class="feature-tag">Digital scanning</span>
-            <span class="feature-tag">Rapid results</span>
-            <span class="feature-tag">Integrated records</span>
-          </div>
+          <h3>Urgent care & imaging centers</h3>
+          <p>Modern urgent care and advanced diagnostic imaging developments designed for rapid, high-quality outpatient treatment. These centers bridge the gap between primary care and emergency services, with digital scanning technology and rapid result turnaround integrated into AMD's facility network.</p>
+          <div class="re-features"><span class="feature-tag">Walk-in services</span><span class="feature-tag">Digital scanning</span><span class="feature-tag">Rapid results</span><span class="feature-tag">Integrated records</span></div>
         </div>
       </div>
- 
       <div class="re-item">
         <div class="re-visual">
-          <div class="img-placeholder">
-            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-            <span>Facility image</span>
-          </div>
+          <div class="img-placeholder"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Facility image</span></div>
         </div>
         <div class="re-text">
-          <h3>Wound care centers</h3>
-          <p>AMD's 24/7 wound care centers are staffed with board-certified podiatrists, infectious disease physicians, nurses, and technicians. Our facilities provide comprehensive, aggressive treatment with markedly better outcomes than non-specialized care settings — including on-site blood work and lab services.</p>
-          <div class="re-features">
-            <span class="feature-tag">24/7 operations</span>
-            <span class="feature-tag">Board-certified specialists</span>
-            <span class="feature-tag">On-site labs</span>
-          </div>
+          <h3>Class A office & specialty centers</h3>
+          <p>Hedwig Place — AMD's premium Class A office development — stands alongside 24/7 wound care centers staffed with board-certified podiatrists, infectious disease physicians, nurses, and technicians, plus a growing roster of medical specialty services.</p>
+          <div class="re-features"><span class="feature-tag">Class A office</span><span class="feature-tag">24/7 wound care</span><span class="feature-tag">Board-certified specialists</span><span class="feature-tag">Medical specialties</span></div>
         </div>
       </div>
- 
     </div>
   </section>
- 
 </div>
- 
-<!-- ═══════════ PAGE: MANAGEMENT SERVICES ═══════════ -->
+
+<!-- ═══ MANAGEMENT SERVICES ═══ -->
 <div class="page" id="page-services">
- 
   <div class="page-header">
-    <div class="page-header-bg"></div>
+    <div class="tech-grid"></div>
     <div class="page-header-inner">
-      <div class="hero-eyebrow">Management services</div>
+      <div class="hero-eyebrow"><span class="pulse-dot"></span>Management services</div>
       <h1>Full-service healthcare operations</h1>
-      <p>AMD manages every layer of healthcare operations — so facilities run efficiently, profitably, and at the highest standard of care.</p>
+      <p>AMD manages every layer of healthcare operations — powered by technology, so facilities run efficiently, profitably, and at the highest standard of care.</p>
     </div>
   </div>
- 
   <section>
     <div class="section-inner">
       <div class="services-grid">
- 
         <div class="service-card">
-          <div class="value-icon">
-            <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-          </div>
+          <div class="value-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
           <h3>Revenue cycle management</h3>
           <p>End-to-end billing optimization including CMS-1500 and CMS-1450 claims processing, Medicare and Medicaid reimbursement, and commercial payer contracting. Our dedicated billing team improves revenue cycle accuracy and reduces payment delays.</p>
         </div>
- 
         <div class="service-card">
-          <div class="value-icon">
-            <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-          </div>
+          <div class="value-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
           <h3>EHR / EMR platform</h3>
-          <p>Tailored electronic health record and medical record platforms that improve treatment efficiency and elevate patients' continuity of care. Our systems eliminate redundant paperwork, automate administrative tasks, and facilitate prior authorizations seamlessly.</p>
+          <p>Tailored electronic health record platforms that improve treatment efficiency and elevate patients' continuity of care. Our systems eliminate redundant paperwork, automate administrative tasks, and facilitate prior authorizations seamlessly.</p>
         </div>
- 
         <div class="service-card">
-          <div class="value-icon">
-            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
-          </div>
+          <div class="value-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
           <h3>Business office management</h3>
           <p>Cross-silo management of medical business offices including administrative staffing, HR, scheduling, bookkeeping, budget management, and inter-department coordination — so clinical staff can focus on patient care.</p>
         </div>
- 
         <div class="service-card">
-          <div class="value-icon">
-            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-          </div>
+          <div class="value-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
           <h3>Facility management</h3>
           <p>Comprehensive premises and equipment management including leasing, maintenance, repair, and long-term capital planning. AMD ensures every facility operates at peak performance and maintains its asset value over time.</p>
         </div>
- 
         <div class="service-card">
-          <div class="value-icon">
-            <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
-          </div>
+          <div class="value-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
           <h3>Physician billing</h3>
           <p>Customizable CMS-1500 software suite that saves providers substantial time and money. Our system helps users quickly access patient information, expedite payments, and improve revenue cycle performance across Medicare, Medicaid, and commercial insurers.</p>
         </div>
- 
         <div class="service-card">
-          <div class="value-icon">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-          </div>
+          <div class="value-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
           <h3>Operations management</h3>
           <p>Driven by a highly experienced management team overseeing operations across every AMD asset holding — providing data-driven policy structures, workforce engagement strategies, and health system financing to keep facilities running profitably.</p>
         </div>
- 
       </div>
     </div>
   </section>
- 
 </div>
- 
-<!-- ═══════════ PAGE: INVESTMENTS ═══════════ -->
+
+<!-- ═══ INVESTMENTS ═══ -->
 <div class="page" id="page-investments">
- 
   <div class="page-header">
-    <div class="page-header-bg"></div>
+    <div class="tech-grid"></div>
     <div class="page-header-inner">
-      <div class="hero-eyebrow">Investments</div>
+      <div class="hero-eyebrow"><span class="pulse-dot"></span>Investments</div>
       <h1>Investment services</h1>
-      <p>AMD Global provides investment services for partners and third-party investors — offering exposure to distinct opportunities across our diversified sectors.</p>
+      <p>AMD Global provides investment services for partners and third-party investors — offering exposure to distinct opportunities in healthcare development and our diversified sectors.</p>
     </div>
   </div>
- 
   <section>
     <div class="section-inner">
       <div class="section-eyebrow">Our approach</div>
       <h2 class="section-title">Disciplined, diversified, dependable</h2>
-      <p class="section-sub">Our investment philosophy is grounded in the same principles that guide our developments: the highest ethical standards, social responsibility, and preservation of maximum value.</p>
+      <p class="section-sub">Our investment philosophy is grounded in the same principles that guide our healthcare developments: the highest ethical standards, social responsibility, and preservation of maximum value.</p>
       <div class="invest-principles">
-        <div class="principle">
-          <div class="principle-num">01</div>
-          <div>
-            <h4>Resilient asset class</h4>
-            <p>Healthcare infrastructure maintains demand regardless of economic cycles — communities always need medical facilities and care.</p>
-          </div>
-        </div>
-        <div class="principle">
-          <div class="principle-num">02</div>
-          <div>
-            <h4>Vertically integrated value chain</h4>
-            <p>From development to daily operations, AMD controls the entire value chain — reducing third-party risk and preserving returns.</p>
-          </div>
-        </div>
-        <div class="principle">
-          <div class="principle-num">03</div>
-          <div>
-            <h4>Diversified exposure</h4>
-            <p>Healthcare, commercial real estate, energy, and occupational care assets spread and balance portfolio risk across sectors.</p>
-          </div>
-        </div>
-        <div class="principle">
-          <div class="principle-num">04</div>
-          <div>
-            <h4>Proven track record</h4>
-            <p>A history of strong risk-adjusted performance through volatile economic and regulatory environments.</p>
-          </div>
-        </div>
-        <div class="principle">
-          <div class="principle-num">05</div>
-          <div>
-            <h4>Ethical operations</h4>
-            <p>All AMD projects operate to the highest ethical, moral, and qualitative standards — protecting reputation alongside capital.</p>
-          </div>
-        </div>
-        <div class="principle">
-          <div class="principle-num">06</div>
-          <div>
-            <h4>Partner-first structure</h4>
-            <p>Full-service development management and investment services designed around the goals of our partners and third-party investors.</p>
-          </div>
-        </div>
+        <div class="principle"><div class="principle-num">01</div><div><h4>Healthcare-anchored resilience</h4><p>Healthcare infrastructure maintains demand regardless of economic cycles — communities always need medical facilities and care.</p></div></div>
+        <div class="principle"><div class="principle-num">02</div><div><h4>Vertically integrated value chain</h4><p>From development to daily operations, AMD controls the entire value chain — reducing third-party risk and preserving returns.</p></div></div>
+        <div class="principle"><div class="principle-num">03</div><div><h4>Physician-centric edge</h4><p>Facilities designed by practicing physicians outperform — clinically informed development is AMD's structural advantage.</p></div></div>
+        <div class="principle"><div class="principle-num">04</div><div><h4>Proven track record</h4><p>Pioneering completed developments — among the first free-standing emergency centers and micro-hospitals — through volatile economic and regulatory environments.</p></div></div>
+        <div class="principle"><div class="principle-num">05</div><div><h4>Diversified exposure</h4><p>Healthcare, commercial real estate, energy, and occupational care assets spread and balance portfolio risk across sectors.</p></div></div>
+        <div class="principle"><div class="principle-num">06</div><div><h4>Partner-first structure</h4><p>Full-service development management and investment services designed around the goals of our partners and third-party investors.</p></div></div>
       </div>
     </div>
   </section>
- 
 </div>
- 
-<!-- ═══════════ PAGE: DEVELOPMENTS ═══════════ -->
+
+<!-- ═══ DEVELOPMENTS ═══ -->
 <div class="page" id="page-developments">
- 
   <div class="page-header">
-    <div class="page-header-bg"></div>
+    <div class="tech-grid"></div>
     <div class="page-header-inner">
-      <div class="hero-eyebrow">Developments</div>
-      <h1>Projects in motion</h1>
-      <p>AMD Global is actively developing and expanding infrastructure across our portfolio, with new facility types entering active development.</p>
+      <div class="hero-eyebrow"><span class="pulse-dot"></span>Developments</div>
+      <h1>Healthcare projects in motion</h1>
+      <p>Completed, operating, and active developments — the proof behind AMD Global's physician-centric development model.</p>
     </div>
   </div>
- 
   <section>
     <div class="section-inner">
       <div class="dev-timeline">
- 
         <div class="dev-item">
-          <div class="dev-dot">
-            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8M8 12h8"/></svg>
-          </div>
+          <div class="dev-dot"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8M8 12h8"/></svg></div>
           <div class="dev-content">
-            <div class="dev-header">
-              <h3>Heights Hospital</h3>
-              <span class="dev-status status-active">Operational</span>
-            </div>
-            <p>AMD's flagship hospital facility, licensed September 2018. Provides full-spectrum care including inpatient services, palliative care, recovery, oncology and infusion, wound care, stress tests, sleep labs, transcranial magnetic stimulation therapy, and outpatient services. Clinical expertise spans internal medicine through highly specialized fields including endocrinology.</p>
-            <div class="dev-img">
-              <!-- To add a real photo, replace the div below with:
-                   <img src="YOUR-IMAGE.jpg" style="width:100%;border-radius:16px;" alt="Heights Hospital"> -->
-              <div class="img-placeholder">
-                <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-                <span>Project image</span>
-              </div>
-            </div>
+            <div class="dev-header"><h3>Heights Hospital</h3><span class="dev-status status-active">Operational</span></div>
+            <p>AMD's flagship healthcare development, licensed September 2018. Provides full-spectrum care including inpatient services, palliative care, recovery, oncology and infusion, wound care, stress tests, sleep labs, transcranial magnetic stimulation therapy, and outpatient services. Clinical expertise spans internal medicine through highly specialized fields including endocrinology.</p>
+            <div class="dev-img"><div class="img-placeholder"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Project image</span></div></div>
           </div>
         </div>
- 
         <div class="dev-item">
-          <div class="dev-dot">
-            <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-          </div>
+          <div class="dev-dot"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
           <div class="dev-content">
-            <div class="dev-header">
-              <h3>Urgent care expansion</h3>
-              <span class="dev-status status-progress">In development</span>
-            </div>
-            <p>AMD is expanding its portfolio with urgent care facilities designed to serve communities with rapid, high-quality outpatient treatment. These centers address a critical gap in accessible healthcare — delivering emergency-adjacent care without the wait times or costs of traditional ER visits.</p>
-            <div class="dev-img">
-              <div class="img-placeholder">
-                <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-                <span>Project image</span>
-              </div>
-            </div>
+            <div class="dev-header"><h3>Free-standing emergency center</h3><span class="dev-status status-active">Delivered</span></div>
+            <p>Among the first free-standing emergency centers — a pioneering AMD development that brought emergency-level care into the community, outside traditional hospital campuses. A proof point for AMD's ability to deliver novel healthcare formats ahead of the market.</p>
+            <div class="dev-img"><div class="img-placeholder"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Project image</span></div></div>
           </div>
         </div>
- 
         <div class="dev-item">
-          <div class="dev-dot">
-            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          </div>
+          <div class="dev-dot"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
           <div class="dev-content">
-            <div class="dev-header">
-              <h3>Imaging centers</h3>
-              <span class="dev-status status-progress">In development</span>
-            </div>
-            <p>Diagnostic imaging facilities integrating advanced digital scanning, rapid result turnaround, and seamless connectivity to AMD's EHR/EMR platform. These centers are designed to operate as standalone assets or as integrated components within AMD's broader facility network.</p>
-            <div class="dev-img">
-              <div class="img-placeholder">
-                <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-                <span>Project image</span>
-              </div>
-            </div>
+            <div class="dev-header"><h3>Micro-hospital — Louisiana</h3><span class="dev-status status-active">Delivered</span></div>
+            <p>One of the first micro-hospitals developed in the country — a compact, full-capability hospital format engineered for faster delivery and community-scale access to inpatient care. AMD's micro-hospital model demonstrated that high-acuity care can be delivered in a smaller, smarter footprint.</p>
+            <div class="dev-img"><div class="img-placeholder"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Project image</span></div></div>
           </div>
         </div>
- 
+        <div class="dev-item">
+          <div class="dev-dot"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="12" y2="17"/></svg></div>
+          <div class="dev-content">
+            <div class="dev-header"><h3>Hedwig Place</h3><span class="dev-status status-active">Delivered</span></div>
+            <p>AMD's Class A office development, delivered to institutional standards. Hedwig Place is home to physician practices, clinical services, and professional tenants — designed around the workflows of the medical community it serves, and a demonstration of AMD's ability to deliver premium commercial real estate alongside healthcare facilities.</p>
+            <div class="dev-img"><div class="img-placeholder"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Project image</span></div></div>
+          </div>
+        </div>
+        <div class="dev-item">
+          <div class="dev-dot"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+          <div class="dev-content">
+            <div class="dev-header"><h3>Urgent care & imaging expansion</h3><span class="dev-status status-progress">In development</span></div>
+            <p>AMD is expanding its healthcare development portfolio with urgent care facilities and diagnostic imaging centers — rapid-access outpatient care with advanced digital scanning, integrated with AMD's EHR/EMR platform and broader facility network.</p>
+            <div class="dev-img"><div class="img-placeholder"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Project image</span></div></div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
- 
 </div>
- 
-<!-- ═══════════ PAGE: CONTACT ═══════════ -->
+
+<!-- ═══ CONTACT ═══ -->
 <div class="page" id="page-contact">
- 
   <div class="page-header">
-    <div class="page-header-bg"></div>
+    <div class="tech-grid"></div>
     <div class="page-header-inner">
-      <div class="hero-eyebrow">Contact</div>
-      <h1>Let's connect</h1>
-      <p>Whether you're a prospective partner, healthcare operator, or community stakeholder — we'd like to hear from you.</p>
+      <div class="hero-eyebrow"><span class="pulse-dot"></span>Contact</div>
+      <h1>Develop your next project with AMD</h1>
+      <p>Physicians, developers, partners, and community stakeholders — tell us what you're building, and let's talk about how AMD can deliver it.</p>
     </div>
   </div>
- 
   <section>
     <div class="section-inner">
       <div class="contact-grid">
         <div>
           <div class="contact-info">
             <div class="contact-item">
-              <div class="contact-icon-wrap">
-                <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-              </div>
-              <div>
-                <h4>Address</h4>
-                <p>9811 Katy Fwy, Suite 1060<br>Houston, TX 77024</p>
-              </div>
+              <div class="contact-icon-wrap"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+              <div><h4>Address</h4><p>9811 Katy Fwy, Suite 1060<br>Houston, TX 77024</p></div>
             </div>
             <div class="contact-item">
-              <div class="contact-icon-wrap">
-                <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.5 19.79 19.79 0 01.22 4.72 2 2 0 012.2 2.5h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 9.9a16 16 0 006.29 6.29l.48-.48a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 18z"/></svg>
-              </div>
-              <div>
-                <h4>Phone</h4>
-                <p>(713) 590-0640</p>
-              </div>
+              <div class="contact-icon-wrap"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.5 19.79 19.79 0 01.22 4.72 2 2 0 012.2 2.5h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 9.9a16 16 0 006.29 6.29l.48-.48a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 18z"/></svg></div>
+              <div><h4>Phone</h4><p>(713) 590-0640</p></div>
             </div>
             <div class="contact-item">
-              <div class="contact-icon-wrap">
-                <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-              </div>
-              <div>
-                <h4>Email</h4>
-                <p>info@amdglobal.com</p>
-              </div>
+              <div class="contact-icon-wrap"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+              <div><h4>Email</h4><p>info@amdglobal.com</p></div>
             </div>
             <div class="contact-item">
-              <div class="contact-icon-wrap">
-                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-              </div>
-              <div>
-                <h4>Hours</h4>
-                <p>Monday – Friday<br>9:00 AM – 5:00 PM CST</p>
-              </div>
+              <div class="contact-icon-wrap"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+              <div><h4>Hours</h4><p>Monday – Friday<br>9:00 AM – 5:00 PM CST</p></div>
             </div>
           </div>
         </div>
         <div class="contact-form">
           <h3>Send us a message</h3>
           <div class="form-row">
-            <div class="form-group">
-              <label>First name</label>
-              <input type="text" placeholder="John">
-            </div>
-            <div class="form-group">
-              <label>Last name</label>
-              <input type="text" placeholder="Smith">
-            </div>
+            <div class="form-group"><label>First name</label><input type="text" placeholder="John"></div>
+            <div class="form-group"><label>Last name</label><input type="text" placeholder="Smith"></div>
           </div>
-          <div class="form-group">
-            <label>Email address</label>
-            <input type="email" placeholder="john@company.com">
-          </div>
+          <div class="form-group"><label>Email address</label><input type="email" placeholder="john@company.com"></div>
           <div class="form-group">
             <label>I'm reaching out as a...</label>
             <select>
               <option value="">Select one</option>
+              <option>Physician / physician group</option>
+              <option>Developer</option>
               <option>Development partner</option>
               <option>Healthcare operator</option>
               <option>Community stakeholder</option>
@@ -1413,33 +677,23 @@ Index · HTML
               <option>Other</option>
             </select>
           </div>
-          <div class="form-group">
-            <label>Message</label>
-            <textarea placeholder="How can we help you?"></textarea>
-          </div>
+          <div class="form-group"><label>Message</label><textarea placeholder="Tell us about your project..."></textarea></div>
           <button class="form-submit" type="button" onclick="handleForm(this)">Send message</button>
         </div>
       </div>
     </div>
   </section>
- 
 </div>
- 
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-inner">
     <div class="footer-top">
       <div class="footer-brand">
-        <div class="footer-brand-logo">AMD<span>Global</span></div>
-        <p>A Houston-based development firm with a broad portfolio of assets in healthcare, commercial real estate, energy, and occupational care.</p>
-        <div class="footer-contact-line">
-          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.5 19.79 19.79 0 01.22 4.72 2 2 0 012.2 2.5h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 9.9a16 16 0 006.29 6.29l.48-.48a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 18z"/></svg>
-          (713) 590-0640
-        </div>
-        <div class="footer-contact-line">
-          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          9811 Katy Fwy, Suite 1060 · Houston, TX 77024
-        </div>
+        <div class="footer-logo-chip"><img src="logo.png" alt="AMD Global"></div>
+        <p>A physician-centric, Houston-based development firm specializing in healthcare development — with a diversified portfolio spanning commercial real estate, energy, and occupational care.</p>
+        <div class="footer-contact-line"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.5 19.79 19.79 0 01.22 4.72 2 2 0 012.2 2.5h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 9.9a16 16 0 006.29 6.29l.48-.48a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 18z"/></svg>(713) 590-0640</div>
+        <div class="footer-contact-line"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>9811 Katy Fwy, Suite 1060 · Houston, TX 77024</div>
       </div>
       <div class="footer-col">
         <h4>Company</h4>
@@ -1452,10 +706,10 @@ Index · HTML
       <div class="footer-col">
         <h4>Real estate</h4>
         <ul class="footer-links">
-          <li><a onclick="showPage('realestate')">Hospitals</a></li>
-          <li><a onclick="showPage('realestate')">Urgent care</a></li>
-          <li><a onclick="showPage('realestate')">Imaging centers</a></li>
-          <li><a onclick="showPage('realestate')">Wound care</a></li>
+          <li><a onclick="showPage('realestate')">Hospitals & micro-hospitals</a></li>
+          <li><a onclick="showPage('realestate')">Emergency centers</a></li>
+          <li><a onclick="showPage('realestate')">Urgent care & imaging</a></li>
+          <li><a onclick="showPage('realestate')">Hedwig Place & specialties</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -1473,7 +727,7 @@ Index · HTML
     </div>
   </div>
 </footer>
- 
+
 <script>
 function showPage(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -1484,21 +738,61 @@ function showPage(id) {
   document.getElementById('navLinks').classList.remove('open');
   window.scrollTo({ top: 0, behavior: 'instant' });
 }
- 
-function toggleMenu() {
-  document.getElementById('navLinks').classList.toggle('open');
-}
- 
+function toggleMenu() { document.getElementById('navLinks').classList.toggle('open'); }
 function handleForm(btn) {
   const original = btn.textContent;
   btn.textContent = 'Sent!';
   btn.style.background = '#0f6e56';
-  setTimeout(() => {
-    btn.textContent = original;
-    btn.style.background = '';
-  }, 2500);
+  setTimeout(() => { btn.textContent = original; btn.style.background = ''; }, 2500);
 }
+function animateCounters() {
+  document.querySelectorAll('[data-count]').forEach(el => {
+    const target = parseInt(el.getAttribute('data-count'));
+    const duration = 1400;
+    const start = performance.now();
+    function tick(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(eased * target);
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  });
+}
+window.addEventListener('load', animateCounters);
+
+// ── Scroll reveal animations ──
+const revealSelectors = [
+  '.section-eyebrow', '.section-title', '.section-sub',
+  '.audience-card', '.milestone', '.process-step', '.sector-tile',
+  '.service-card', '.principle', '.re-item', '.dev-item',
+  '.contact-form', '.contact-item', '.about-lead', '.about-body',
+  '.tech-frame', '.img-placeholder', '.frame-caption'
+].join(',');
+
+let revealObserver;
+
+function initReveal() {
+  if (!('IntersectionObserver' in window)) return;
+  revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll(revealSelectors).forEach(el => {
+    el.classList.add('reveal');
+    // Stagger siblings inside grids for a cascading effect
+    const idx = Array.prototype.indexOf.call(el.parentElement.children, el);
+    el.style.transitionDelay = ((idx % 6) * 70) + 'ms';
+    revealObserver.observe(el);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', initReveal);
 </script>
 </body>
 </html>
- 
