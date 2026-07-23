@@ -1,0 +1,1538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AMD Global — Physician-Centric Healthcare Development</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #030f21; --navy-2: #06182f; --blue: #0a4f8f; --blue-mid: #1565c0;
+    --blue-bright: #2196f3; --blue-light: #e3f0fd; --blue-xlight: #f0f6ff;
+    --accent: #4d8aff; --accent-dark: #2e63e6; --ice: #8ab6ff;
+    --white: #ffffff; --off-white: #f6f9fd;
+    --text-primary: #0a1628; --text-secondary: #3d5273; --text-muted: #7a90aa;
+    --border: rgba(10,79,143,0.12); --border-strong: rgba(10,79,143,0.22);
+    --font-display: 'Manrope', sans-serif; --font-body: 'Inter', sans-serif; --font-mono: 'JetBrains Mono', monospace;
+    --radius-sm: 6px; --radius: 10px; --radius-lg: 16px; --radius-xl: 24px;
+    --transition: 0.2s cubic-bezier(0.4,0,0.2,1);
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); color: var(--text-primary); background: var(--white); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(255,255,255,0.96); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); height: 68px; display: flex; align-items: center; padding: 0 5%; }
+  .nav-inner { width: 100%; max-width: 1240px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+  .nav-logo { display: flex; align-items: center; cursor: pointer; }
+  .nav-logo img { height: 42px; width: auto; display: block; }
+  .nav-links { display: flex; align-items: center; gap: 22px; list-style: none; }
+  .nav-links a { font-size: 13px; font-weight: 500; color: var(--text-secondary); text-decoration: none; transition: color var(--transition); cursor: pointer; padding: 6px 0; border-bottom: 2px solid transparent; }
+  .nav-links a:hover { color: var(--text-primary); }
+  .nav-links a.active { color: var(--blue); border-bottom-color: var(--accent); }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+  .hamburger span { width: 22px; height: 2px; background: var(--navy); border-radius: 2px; }
+
+  .page { display: none; }
+  .page.active { display: block; }
+
+  .hero { min-height: 94vh; background: radial-gradient(ellipse 80% 60% at 70% 20%, rgba(77,138,255,0.12), transparent), radial-gradient(ellipse 60% 50% at 20% 90%, rgba(138,182,255,0.07), transparent), linear-gradient(160deg, var(--navy) 0%, var(--navy-2) 60%, #0a2f66 100%); display: flex; flex-direction: column; justify-content: center; padding: 140px 5% 96px; position: relative; overflow: hidden; }
+  .tech-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(77,138,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(77,138,255,0.05) 1px, transparent 1px); background-size: 44px 44px; }
+  .hero-inner { max-width: 1240px; margin: 0 auto; width: 100%; position: relative; z-index: 1; }
+  .hero-eyebrow { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-mono); font-size: 11.5px; font-weight: 500; color: var(--accent); letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 26px; padding: 7px 14px; border: 1px solid rgba(77,138,255,0.3); border-radius: 4px; background: rgba(77,138,255,0.06); }
+  .pulse-dot { width: 7px; height: 7px; background: var(--ice); border-radius: 50%; box-shadow: 0 0 8px rgba(138,182,255,0.7); }
+  .hero h1 { font-family: var(--font-display); font-size: clamp(38px, 5.6vw, 70px); font-weight: 800; color: #fff; line-height: 1.08; letter-spacing: -1.4px; max-width: 840px; margin-bottom: 26px; text-shadow: 0 2px 8px rgba(0,0,0,0.35); }
+  .hero h1 em { font-style: normal; color: var(--accent); }
+  .hero-sub { font-size: 17px; color: rgba(255,255,255,0.8); max-width: 620px; line-height: 1.75; margin-bottom: 40px; }
+  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 60px; }
+  .btn-primary { background: var(--accent); color: #021724; font-size: 14px; font-weight: 600; padding: 13px 28px; border-radius: var(--radius); border: none; cursor: pointer; text-decoration: none; display: inline-block; transition: all var(--transition); box-shadow: 0 0 24px rgba(77,138,255,0.25); }
+  .btn-primary:hover { background: #6ba3ff; transform: translateY(-2px); box-shadow: 0 0 36px rgba(77,138,255,0.4); }
+  .btn-outline { background: transparent; color: rgba(255,255,255,0.92); font-size: 14px; font-weight: 500; padding: 13px 28px; border-radius: var(--radius); border: 1px solid rgba(255,255,255,0.3); cursor: pointer; text-decoration: none; display: inline-block; transition: all var(--transition); }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+  .hero-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: rgba(77,138,255,0.15); border-radius: var(--radius-lg) var(--radius-lg) 0 0; overflow: hidden; max-width: 860px; border: 1px solid rgba(77,138,255,0.2); border-bottom: none; }
+  .hero-stat { background: rgba(3,15,33,0.78); padding: 22px 24px; text-align: center; position: relative; }
+  .hero-stat::after { content: ''; position: absolute; top: 0; left: 20%; right: 20%; height: 2px; background: linear-gradient(90deg, transparent, var(--accent), transparent); opacity: 0.5; }
+  .hero-stat-val { font-family: var(--font-mono); font-size: 26px; font-weight: 500; color: #fff; letter-spacing: -0.5px; }
+  .hero-stat-val span { color: var(--accent); }
+  .hero-stat-label { font-size: 11.5px; color: rgba(255,255,255,0.55); margin-top: 4px; }
+
+  /* ── Futuristic city skyline (static, no animation) ── */
+  .city-band { position: absolute; left: 0; right: 0; bottom: 0; height: 58%; pointer-events: none; z-index: 0; }
+  .city-band svg { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 100%; display: block; }
+  .city-fade { position: absolute; inset: 0; background: linear-gradient(to bottom, var(--navy) 0%, rgba(3,15,33,0) 26%); z-index: 1; }
+  .city-back { fill: #16416f; }
+  .city-mid { fill: #0e2c55; }
+  .city-front { fill: #071c3d; }
+  .city-roofline { fill: rgba(122,170,255,0.55); }
+  .city-window { fill: rgba(140,186,255,0.85); }
+  .city-window-dim { fill: rgba(138,182,255,0.38); }
+  .city-window-faint { fill: rgba(138,182,255,0.16); }
+  .city-beacon { fill: var(--accent); }
+
+  .page-header { background: radial-gradient(ellipse 80% 60% at 70% 20%, rgba(77,138,255,0.1), transparent), linear-gradient(160deg, var(--navy) 0%, var(--navy-2) 60%, #0a2f66 100%); padding: 150px 5% 68px; position: relative; overflow: hidden; }
+  .page-header-inner { max-width: 1240px; margin: 0 auto; position: relative; z-index: 1; }
+  .page-header .hero-eyebrow { margin-bottom: 18px; }
+  .page-header h1 { font-family: var(--font-display); font-size: clamp(30px, 4.5vw, 52px); font-weight: 800; color: #fff; letter-spacing: -1px; line-height: 1.12; margin-bottom: 16px; text-shadow: 0 2px 8px rgba(0,0,0,0.35); }
+  .page-header p { font-size: 16px; color: rgba(255,255,255,0.75); max-width: 620px; line-height: 1.75; }
+
+  section { padding: 88px 5%; }
+  .section-inner { max-width: 1240px; margin: 0 auto; }
+  .section-eyebrow { font-family: var(--font-mono); font-size: 11px; font-weight: 500; color: var(--blue-bright); letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+  .section-eyebrow::before { content: ''; width: 20px; height: 2px; background: var(--accent); }
+  .section-title { font-family: var(--font-display); font-size: clamp(26px, 3.5vw, 40px); font-weight: 800; color: var(--text-primary); letter-spacing: -0.8px; line-height: 1.15; margin-bottom: 14px; }
+  .section-sub { font-size: 16px; color: var(--text-secondary); max-width: 600px; line-height: 1.75; margin-bottom: 52px; }
+
+  .audience-band { background: var(--off-white); }
+  .audience-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .audience-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 38px 34px; position: relative; overflow: hidden; transition: all var(--transition); }
+  .audience-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--blue-bright), var(--ice)); }
+  .audience-card:hover { transform: translateY(-4px); box-shadow: 0 18px 48px rgba(10,79,143,0.13); border-color: var(--blue-bright); }
+  .audience-tag { font-family: var(--font-mono); font-size: 11px; color: var(--accent-dark); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 16px; display: block; }
+  .audience-card h3 { font-family: var(--font-display); font-size: 22px; font-weight: 800; color: var(--text-primary); letter-spacing: -0.4px; margin-bottom: 14px; }
+  .audience-card > p { font-size: 14.5px; color: var(--text-secondary); line-height: 1.8; margin-bottom: 20px; }
+  .audience-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 26px; }
+  .audience-list li { font-size: 13.5px; color: var(--text-secondary); display: flex; gap: 10px; align-items: flex-start; line-height: 1.6; }
+  .audience-list li::before { content: ''; width: 6px; height: 6px; background: var(--ice); border-radius: 50%; margin-top: 7px; flex-shrink: 0; box-shadow: 0 0 8px rgba(138,182,255,0.6); }
+  .audience-cta { font-size: 13.5px; font-weight: 600; color: var(--blue-mid); cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: gap var(--transition); }
+  .audience-cta:hover { gap: 10px; }
+
+  .milestones { background: var(--navy); position: relative; overflow: hidden; }
+  .milestones .section-title { color: white; }
+  .milestones .section-sub { color: rgba(255,255,255,0.62); }
+  .milestone-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; position: relative; z-index: 1; }
+  .milestone { background: rgba(255,255,255,0.04); border: 1px solid rgba(77,138,255,0.16); border-radius: var(--radius-lg); padding: 26px 22px; transition: all var(--transition); }
+  .milestone:hover { border-color: rgba(138,182,255,0.5); background: rgba(138,182,255,0.04); }
+  .milestone-badge { font-family: var(--font-mono); font-size: 10.5px; color: var(--ice); letter-spacing: 0.12em; text-transform: uppercase; padding: 5px 10px; border: 1px solid rgba(138,182,255,0.3); border-radius: 4px; display: inline-block; margin-bottom: 16px; background: rgba(138,182,255,0.06); }
+  .milestone h3 { font-family: var(--font-display); font-size: 17px; font-weight: 700; color: white; margin-bottom: 8px; line-height: 1.35; }
+  .milestone p { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.7; }
+
+  .tech-frame { position: relative; border-radius: var(--radius-lg); overflow: hidden; background: var(--navy); }
+  .tech-frame img { width: 100%; display: block; border-radius: var(--radius-lg); }
+  .tech-frame::before, .tech-frame::after { content: ''; position: absolute; width: 28px; height: 28px; border: 2px solid var(--accent); z-index: 2; pointer-events: none; }
+  .tech-frame::before { top: 12px; left: 12px; border-right: none; border-bottom: none; border-radius: 4px 0 0 0; }
+  .tech-frame::after { bottom: 12px; right: 12px; border-left: none; border-top: none; border-radius: 0 0 4px 0; }
+  .frame-caption { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 10px; display: flex; align-items: center; gap: 7px; }
+  .frame-caption::before { content: ''; width: 6px; height: 6px; background: var(--ice); border-radius: 50%; }
+
+  .img-placeholder { background: linear-gradient(rgba(77,138,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(77,138,255,0.04) 1px, transparent 1px), linear-gradient(150deg, var(--navy-2), #0a3a63); background-size: 28px 28px, 28px 28px, 100% 100%; border-radius: var(--radius-lg); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; color: rgba(255,255,255,0.55); min-height: 240px; position: relative; overflow: hidden; }
+  .img-placeholder::before, .img-placeholder::after { content: ''; position: absolute; width: 24px; height: 24px; border: 2px solid rgba(77,138,255,0.5); }
+  .img-placeholder::before { top: 12px; left: 12px; border-right: none; border-bottom: none; }
+  .img-placeholder::after { bottom: 12px; right: 12px; border-left: none; border-top: none; }
+  .img-placeholder svg { width: 30px; height: 30px; stroke: rgba(77,138,255,0.6); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+  .img-placeholder span { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; }
+
+  .about-split { display: grid; grid-template-columns: 1.05fr 1fr; gap: 56px; align-items: center; }
+  .about-lead { font-size: 18px; color: var(--text-primary); line-height: 1.8; }
+  .about-lead strong { font-weight: 600; }
+  .about-body { font-size: 15px; color: var(--text-secondary); line-height: 1.85; margin-top: 20px; }
+
+  .process-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+  .process-step { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px 18px; transition: all var(--transition); }
+  .process-step:hover { border-color: var(--blue-bright); box-shadow: 0 10px 28px rgba(10,79,143,0.09); }
+  .process-num { font-family: var(--font-mono); font-size: 11px; color: var(--accent-dark); letter-spacing: 0.1em; margin-bottom: 14px; }
+  .process-step h3 { font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; }
+  .process-step p { font-size: 12.5px; color: var(--text-secondary); line-height: 1.65; }
+
+  .value-icon { width: 44px; height: 44px; border-radius: var(--radius-sm); background: var(--blue-light); display: flex; align-items: center; justify-content: center; margin-bottom: 18px; }
+  .value-icon svg { width: 22px; height: 22px; stroke: var(--blue-mid); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+  .sector-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .sector-tile { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 26px 20px; text-align: center; transition: all var(--transition); cursor: pointer; text-decoration: none; display: block; position: relative; overflow: hidden; }
+  .sector-tile::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--blue-bright), var(--ice)); transform: scaleX(0); transition: transform 0.3s ease; }
+  .sector-tile:hover::before { transform: scaleX(1); }
+  .sector-tile:hover { border-color: var(--blue-bright); transform: translateY(-3px); box-shadow: 0 12px 32px rgba(10,79,143,0.1); }
+  .sector-tile .value-icon { margin: 0 auto 14px; }
+  .sector-tile h3 { font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
+  .sector-tile p { font-size: 12.5px; color: var(--text-muted); line-height: 1.6; }
+
+  .re-item { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; padding: 48px 0; border-bottom: 1px solid var(--border); }
+  .re-item:last-child { border-bottom: none; }
+  .re-item:nth-child(even) .re-visual { order: 2; }
+  .re-text h3 { font-family: var(--font-display); font-size: 24px; font-weight: 800; color: var(--text-primary); letter-spacing: -0.4px; margin-bottom: 14px; }
+  .re-text p { font-size: 15px; color: var(--text-secondary); line-height: 1.8; margin-bottom: 18px; }
+  .re-features { display: flex; flex-wrap: wrap; gap: 7px; }
+  .feature-tag { font-family: var(--font-mono); font-size: 11px; color: var(--blue-mid); background: var(--blue-light); padding: 5px 12px; border-radius: 4px; font-weight: 500; letter-spacing: 0.03em; }
+
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .service-card { border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 30px 26px; transition: all var(--transition); background: var(--white); position: relative; overflow: hidden; }
+  .service-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--blue-bright), var(--ice)); transform: scaleX(0); transition: transform 0.3s ease; }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-card:hover { border-color: var(--blue-bright); transform: translateY(-3px); box-shadow: 0 12px 32px rgba(10,79,143,0.1); }
+  .service-card h3 { font-family: var(--font-display); font-size: 16.5px; font-weight: 700; color: var(--text-primary); margin-bottom: 10px; }
+  .service-card p { font-size: 13.5px; color: var(--text-secondary); line-height: 1.75; }
+
+  .invest-principles { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .principle { display: flex; gap: 18px; align-items: flex-start; padding: 24px; border: 1px solid var(--border); border-radius: var(--radius-lg); transition: all var(--transition); background: var(--white); }
+  .principle:hover { border-color: var(--blue-bright); background: var(--blue-xlight); }
+  .principle-num { font-family: var(--font-mono); font-size: 13px; font-weight: 500; color: var(--accent-dark); padding: 4px 8px; background: rgba(77,138,255,0.1); border-radius: 4px; flex-shrink: 0; }
+  .principle h4 { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+  .principle p { font-size: 13.5px; color: var(--text-secondary); line-height: 1.7; }
+
+  .dev-timeline { display: flex; flex-direction: column; position: relative; }
+  .dev-timeline::before { content: ''; position: absolute; left: 22px; top: 12px; bottom: 12px; width: 2px; background: linear-gradient(to bottom, var(--blue-bright), var(--ice)); }
+  .dev-item { display: flex; gap: 24px; padding: 0 0 40px 0; position: relative; }
+  .dev-item:last-child { padding-bottom: 0; }
+  .dev-dot { width: 46px; height: 46px; border-radius: 50%; background: var(--white); border: 2px solid var(--blue-bright); display: flex; align-items: center; justify-content: center; flex-shrink: 0; position: relative; z-index: 1; box-shadow: 0 0 16px rgba(64,120,255,0.3); }
+  .dev-dot svg { width: 20px; height: 20px; stroke: var(--blue-mid); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .dev-content { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 26px; flex: 1; transition: border-color var(--transition); }
+  .dev-content:hover { border-color: var(--blue-bright); }
+  .dev-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 10px; }
+  .dev-content h3 { font-family: var(--font-display); font-size: 18px; font-weight: 700; }
+  .dev-status { font-family: var(--font-mono); font-size: 10.5px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 11px; border-radius: 4px; }
+  .status-active { background: #e0f7ef; color: #0f6e56; }
+  .status-progress { background: #fff3cd; color: #856404; }
+  .dev-content p { font-size: 14px; color: var(--text-secondary); line-height: 1.75; margin-bottom: 16px; }
+  .dev-img .img-placeholder { min-height: 190px; }
+
+  /* ── Case study ── */
+  .case-study { background: linear-gradient(150deg, var(--navy) 0%, var(--navy-2) 70%, #0a2f66 100%); border-radius: var(--radius-xl); padding: 46px 44px; display: grid; grid-template-columns: 1.15fr 1fr; gap: 44px; align-items: center; position: relative; overflow: hidden; border: 1px solid rgba(77,138,255,0.2); }
+  .case-study-tag { font-family: var(--font-mono); font-size: 11px; color: var(--ice); letter-spacing: 0.14em; text-transform: uppercase; padding: 5px 11px; border: 1px solid rgba(138,182,255,0.3); border-radius: 4px; display: inline-block; margin-bottom: 18px; background: rgba(138,182,255,0.06); }
+  .case-study h3 { font-family: var(--font-display); font-size: 26px; font-weight: 800; color: #fff; letter-spacing: -0.5px; margin-bottom: 14px; line-height: 1.2; }
+  .case-study p { font-size: 14.5px; color: rgba(255,255,255,0.72); line-height: 1.8; margin-bottom: 18px; }
+  .case-facts { display: flex; flex-wrap: wrap; gap: 8px; }
+  .case-fact { font-family: var(--font-mono); font-size: 11px; color: var(--ice); background: rgba(77,138,255,0.1); border: 1px solid rgba(77,138,255,0.22); padding: 6px 12px; border-radius: 4px; letter-spacing: 0.04em; }
+
+  /* ── MedSpa locations ── */
+  .medspa-feature { display: grid; grid-template-columns: 1fr 1.05fr; gap: 48px; align-items: center; margin-bottom: 52px; }
+  .loc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .loc-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px 22px; transition: all var(--transition); }
+  .loc-card:hover { border-color: var(--blue-bright); box-shadow: 0 10px 28px rgba(10,79,143,0.09); }
+  .loc-card h4 { font-family: var(--font-display); font-size: 16px; font-weight: 700; color: var(--text-primary); margin: 10px 0 6px; }
+  .loc-card p { font-size: 13px; color: var(--text-secondary); line-height: 1.7; }
+
+  /* ── CEO page ── */
+  .ceo-grid { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 56px; align-items: start; }
+  .ceo-photo { position: sticky; top: 96px; }
+  .ceo-photo .tech-frame img { aspect-ratio: 1 / 1; object-fit: cover; object-position: center 20%; }
+  .ceo-name-band { background: linear-gradient(100deg, var(--blue-deep), var(--accent-dark)); padding: 20px 26px; border-radius: 0 0 var(--radius-lg) var(--radius-lg); margin-top: -6px; position: relative; z-index: 2; }
+  .ceo-name-band h3 { font-family: var(--font-display); font-size: 24px; font-weight: 800; color: #fff; letter-spacing: -0.4px; }
+  .ceo-name-band p { font-size: 13.5px; color: rgba(255,255,255,0.82); margin-top: 3px; font-family: var(--font-mono); letter-spacing: 0.04em; }
+  .ceo-content > p { font-size: 15px; color: var(--text-secondary); line-height: 1.85; margin-bottom: 20px; }
+  .ceo-content > p strong { color: var(--text-primary); font-weight: 600; }
+  .ceo-quote { border: 1px solid var(--border-strong); border-left: 3px solid var(--accent); border-radius: var(--radius-lg); padding: 30px 34px; margin: 30px 0 26px; background: var(--blue-xlight); position: relative; }
+  .ceo-quote p { font-size: 14.5px; font-style: italic; color: var(--text-secondary); line-height: 1.85; }
+  .ceo-quote::before { content: '\201C'; font-family: var(--font-display); font-size: 54px; font-weight: 800; color: var(--accent); line-height: 1; position: absolute; top: 14px; left: 16px; opacity: 0.35; }
+
+  .contact-info { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; max-width: 860px; }
+  .contact-item { display: flex; gap: 16px; align-items: flex-start; background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 26px 24px; transition: all var(--transition); }
+  .contact-item:hover { border-color: var(--blue-bright); box-shadow: 0 10px 28px rgba(10,79,143,0.09); }
+  .contact-icon-wrap { width: 44px; height: 44px; border-radius: var(--radius); background: var(--blue-light); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .contact-icon-wrap svg { width: 20px; height: 20px; stroke: var(--blue-mid); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .contact-item h4 { font-family: var(--font-mono); font-size: 11px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 3px; }
+  .contact-item p { font-size: 15px; line-height: 1.5; }
+
+  footer { background: var(--navy); padding: 56px 5% 32px; border-top: 2px solid rgba(77,138,255,0.25); }
+  .footer-inner { max-width: 1240px; margin: 0 auto; }
+  .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+  .footer-logo-chip { display: inline-block; background: white; border-radius: var(--radius); padding: 10px 16px; margin-bottom: 16px; }
+  .footer-logo-chip img { height: 36px; width: auto; display: block; }
+  .footer-brand p { font-size: 13.5px; color: rgba(255,255,255,0.45); line-height: 1.75; max-width: 300px; margin-bottom: 20px; }
+  .footer-contact-line { font-size: 13px; color: rgba(255,255,255,0.55); margin-bottom: 5px; display: flex; align-items: center; gap: 7px; }
+  .footer-contact-line svg { width: 14px; height: 14px; stroke: var(--accent); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+  .footer-col h4 { font-family: var(--font-mono); font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 16px; }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-links a { font-size: 13.5px; color: rgba(255,255,255,0.58); text-decoration: none; transition: color var(--transition); cursor: pointer; }
+  .footer-links a:hover { color: var(--accent); }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.07); padding-top: 24px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .footer-bottom p { font-size: 12.5px; color: rgba(255,255,255,0.32); }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+
+  @media (max-width: 1000px) {
+    .nav-links { display: none; }
+    .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 68px; left: 0; right: 0; background: rgba(255,255,255,0.98); padding: 20px 5%; gap: 4px; border-bottom: 1px solid var(--border); }
+    .nav-links.open a { padding: 10px 0; }
+    .hamburger { display: flex; }
+  }
+
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 68px; left: 0; right: 0; background: rgba(255,255,255,0.98); padding: 20px 5%; gap: 4px; border-bottom: 1px solid var(--border); }
+    .nav-links.open a { padding: 10px 0; }
+    .hamburger { display: flex; }
+    .hero-stats { grid-template-columns: repeat(2, 1fr); }
+    .services-grid, .milestone-grid { grid-template-columns: 1fr; }
+    .sector-row, .process-row { grid-template-columns: 1fr 1fr; }
+    .about-split, .re-item, .invest-principles, .audience-grid, .case-study, .medspa-feature, .ceo-grid, .contact-info { grid-template-columns: 1fr; gap: 28px; }
+    .loc-grid { grid-template-columns: 1fr; }
+    .ceo-photo { position: static; }
+    .case-study { padding: 34px 26px; }
+    .re-item:nth-child(even) .re-visual { order: 0; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .hero-actions { flex-direction: column; }
+    .btn-primary, .btn-outline { text-align: center; }
+    section { padding: 60px 5%; }
+    .page-header { padding: 116px 5% 48px; }
+  }
+
+  @media (max-width: 480px) {
+    .sector-row, .process-row { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" onclick="showPage('home')"><img src="logo.png" alt="AMD Global"></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a data-page="home" class="active" onclick="showPage('home')">About us</a></li>
+      <li><a data-page="ceo" onclick="showPage('ceo')">About the CEO</a></li>
+      <li><a data-page="realestate" onclick="showPage('realestate')">Real estate</a></li>
+      <li><a data-page="services" onclick="showPage('services')">Management services</a></li>
+      <li><a data-page="investments" onclick="showPage('investments')">Investments</a></li>
+      <li><a data-page="developments" onclick="showPage('developments')">Developments</a></li>
+      <li><a data-page="contact" onclick="showPage('contact')">Contact</a></li>
+    </ul>
+    <div class="hamburger" onclick="toggleMenu()" aria-label="Open menu"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<!-- ═══ HOME ═══ -->
+<div class="page active" id="page-home">
+
+  <div class="hero">
+    <div class="tech-grid"></div>
+    <div class="hero-inner">
+      <div class="hero-eyebrow"><span class="pulse-dot"></span>Physician-centric healthcare development · Houston, TX</div>
+      <h1>Physician-Inspired.<br>Developer-Proven.<br><em>AI-Enhanced.</em></h1>
+      <p class="hero-sub">AMD Global is a physician-centric development firm that designs, builds, and operates next-generation healthcare infrastructure. Founded by physicians who develop — we understand what clinicians need and what investors expect, because we've delivered both.</p>
+      <div class="hero-actions">
+        <a class="btn-primary" onclick="showPage('developments')">See what we've built</a>
+        <a class="btn-outline" onclick="showPage('contact')">Develop with us</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="hero-stat-val"><span>1st</span></div><div class="hero-stat-label">Free-standing emergency center</div></div>
+        <div class="hero-stat"><div class="hero-stat-val"><span>1st</span></div><div class="hero-stat-label">Micro-hospital developed</div></div>
+        <div class="hero-stat"><div class="hero-stat-val"><span>Class A</span></div><div class="hero-stat-label">Hedwig Place office development</div></div>
+        <div class="hero-stat"><div class="hero-stat-val"><span>2018</span></div><div class="hero-stat-label">Flagship hospital licensed</div></div>
+      </div>
+    </div>
+    <!-- Futuristic city skyline — static backdrop, sits behind hero content -->
+    <div class="city-band" aria-hidden="true">
+      <div class="city-fade"></div>
+      <svg viewBox="0 0 1440 320" preserveAspectRatio="xMidYMax slice">
+        <defs>
+          <radialGradient id="horizonGlow" cx="50%" cy="100%" r="85%">
+            <stop offset="0%" stop-color="#4d8aff" stop-opacity="0.28"/>
+            <stop offset="45%" stop-color="#4d8aff" stop-opacity="0.10"/>
+            <stop offset="100%" stop-color="#4d8aff" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <rect x="0" y="0" width="1440" height="320" fill="url(#horizonGlow)"/>
+        <g class="city-back">
+        <rect x="0" y="140" width="70" height="180"/>
+        <rect x="90" y="95" width="55" height="225"/>
+        <rect x="160" y="160" width="80" height="160"/>
+        <rect x="260" y="75" width="48" height="245"/>
+        <rect x="330" y="130" width="70" height="190"/>
+        <rect x="420" y="45" width="42" height="275"/>
+        <rect x="480" y="120" width="85" height="200"/>
+        <rect x="590" y="88" width="52" height="232"/>
+        <rect x="660" y="150" width="75" height="170"/>
+        <rect x="755" y="55" width="46" height="265"/>
+        <rect x="820" y="130" width="80" height="190"/>
+        <rect x="920" y="82" width="55" height="238"/>
+        <rect x="995" y="145" width="78" height="175"/>
+        <rect x="1090" y="65" width="45" height="255"/>
+        <rect x="1155" y="125" width="85" height="195"/>
+        <rect x="1260" y="92" width="52" height="228"/>
+        <rect x="1330" y="140" width="110" height="180"/>
+        <polygon points="441,45 441,16 445,16 445,45"/><polygon points="777,55 777,24 781,24 781,55"/><polygon points="1111,65 1111,36 1115,36 1115,65"/>
+        </g>
+        <g>
+        <rect class="city-window-dim" x="7" y="167" width="6" height="4"/>
+        <rect class="city-window-dim" x="7" y="257" width="6" height="4"/>
+        <rect class="city-window-dim" x="7" y="287" width="6" height="4"/>
+        <rect class="city-window-faint" x="7" y="302" width="6" height="4"/>
+        <rect class="city-window-dim" x="21" y="167" width="6" height="4"/>
+        <rect class="city-window-faint" x="21" y="182" width="6" height="4"/>
+        <rect class="city-window-dim" x="21" y="272" width="6" height="4"/>
+        <rect class="city-window-faint" x="35" y="167" width="6" height="4"/>
+        <rect class="city-window-dim" x="35" y="212" width="6" height="4"/>
+        <rect class="city-window-dim" x="35" y="227" width="6" height="4"/>
+        <rect class="city-window-dim" x="49" y="272" width="6" height="4"/>
+        <rect class="city-window-dim" x="97" y="107" width="6" height="4"/>
+        <rect class="city-window-dim" x="97" y="137" width="6" height="4"/>
+        <rect class="city-window-faint" x="97" y="212" width="6" height="4"/>
+        <rect class="city-window-faint" x="97" y="287" width="6" height="4"/>
+        <rect class="city-window-faint" x="111" y="107" width="6" height="4"/>
+        <rect class="city-window-dim" x="111" y="242" width="6" height="4"/>
+        <rect class="city-window-faint" x="111" y="287" width="6" height="4"/>
+        <rect class="city-window-faint" x="125" y="302" width="6" height="4"/>
+        <rect class="city-window-dim" x="167" y="202" width="6" height="4"/>
+        <rect class="city-window-dim" x="167" y="217" width="6" height="4"/>
+        <rect class="city-window-dim" x="167" y="232" width="6" height="4"/>
+        <rect class="city-window-dim" x="167" y="292" width="6" height="4"/>
+        <rect class="city-window-dim" x="181" y="247" width="6" height="4"/>
+        <rect class="city-window-dim" x="195" y="202" width="6" height="4"/>
+        <rect class="city-window-faint" x="209" y="172" width="6" height="4"/>
+        <rect class="city-window-faint" x="209" y="262" width="6" height="4"/>
+        <rect class="city-window-dim" x="223" y="202" width="6" height="4"/>
+        <rect class="city-window-dim" x="223" y="232" width="6" height="4"/>
+        <rect class="city-window-dim" x="267" y="87" width="6" height="4"/>
+        <rect class="city-window-dim" x="267" y="132" width="6" height="4"/>
+        <rect class="city-window-dim" x="267" y="162" width="6" height="4"/>
+        <rect class="city-window-dim" x="267" y="207" width="6" height="4"/>
+        <rect class="city-window-faint" x="267" y="297" width="6" height="4"/>
+        <rect class="city-window-faint" x="281" y="117" width="6" height="4"/>
+        <rect class="city-window-dim" x="281" y="207" width="6" height="4"/>
+        <rect class="city-window-dim" x="281" y="297" width="6" height="4"/>
+        <rect class="city-window-dim" x="295" y="147" width="6" height="4"/>
+        <rect class="city-window-faint" x="295" y="192" width="6" height="4"/>
+        <rect class="city-window-faint" x="295" y="207" width="6" height="4"/>
+        <rect class="city-window-faint" x="295" y="297" width="6" height="4"/>
+        <rect class="city-window-dim" x="337" y="142" width="6" height="4"/>
+        <rect class="city-window-dim" x="337" y="247" width="6" height="4"/>
+        <rect class="city-window-faint" x="351" y="157" width="6" height="4"/>
+        <rect class="city-window-dim" x="351" y="292" width="6" height="4"/>
+        <rect class="city-window-faint" x="365" y="217" width="6" height="4"/>
+        <rect class="city-window-faint" x="365" y="247" width="6" height="4"/>
+        <rect class="city-window-dim" x="365" y="277" width="6" height="4"/>
+        <rect class="city-window-faint" x="379" y="277" width="6" height="4"/>
+        <rect class="city-window-dim" x="427" y="117" width="6" height="4"/>
+        <rect class="city-window-faint" x="427" y="177" width="6" height="4"/>
+        <rect class="city-window-dim" x="427" y="207" width="6" height="4"/>
+        <rect class="city-window-faint" x="427" y="222" width="6" height="4"/>
+        <rect class="city-window-dim" x="427" y="282" width="6" height="4"/>
+        <rect class="city-window-faint" x="441" y="162" width="6" height="4"/>
+        <rect class="city-window-dim" x="441" y="282" width="6" height="4"/>
+        <rect class="city-window-dim" x="487" y="162" width="6" height="4"/>
+        <rect class="city-window-faint" x="487" y="177" width="6" height="4"/>
+        <rect class="city-window-faint" x="487" y="267" width="6" height="4"/>
+        <rect class="city-window-dim" x="501" y="177" width="6" height="4"/>
+        <rect class="city-window-faint" x="501" y="252" width="6" height="4"/>
+        <rect class="city-window-dim" x="501" y="267" width="6" height="4"/>
+        <rect class="city-window-dim" x="501" y="282" width="6" height="4"/>
+        <rect class="city-window-faint" x="515" y="177" width="6" height="4"/>
+        <rect class="city-window-dim" x="515" y="267" width="6" height="4"/>
+        <rect class="city-window-dim" x="529" y="132" width="6" height="4"/>
+        <rect class="city-window-dim" x="529" y="237" width="6" height="4"/>
+        <rect class="city-window-dim" x="529" y="252" width="6" height="4"/>
+        <rect class="city-window-faint" x="543" y="162" width="6" height="4"/>
+        <rect class="city-window-dim" x="543" y="177" width="6" height="4"/>
+        <rect class="city-window-faint" x="543" y="267" width="6" height="4"/>
+        <rect class="city-window-dim" x="543" y="297" width="6" height="4"/>
+        <rect class="city-window-faint" x="597" y="160" width="6" height="4"/>
+        <rect class="city-window-dim" x="597" y="250" width="6" height="4"/>
+        <rect class="city-window-dim" x="611" y="175" width="6" height="4"/>
+        <rect class="city-window-dim" x="625" y="100" width="6" height="4"/>
+        <rect class="city-window-faint" x="625" y="115" width="6" height="4"/>
+        <rect class="city-window-dim" x="625" y="265" width="6" height="4"/>
+        <rect class="city-window-faint" x="625" y="295" width="6" height="4"/>
+        <rect class="city-window-dim" x="667" y="192" width="6" height="4"/>
+        <rect class="city-window-dim" x="681" y="192" width="6" height="4"/>
+        <rect class="city-window-dim" x="681" y="297" width="6" height="4"/>
+        <rect class="city-window-dim" x="709" y="162" width="6" height="4"/>
+        <rect class="city-window-dim" x="709" y="282" width="6" height="4"/>
+        <rect class="city-window-faint" x="762" y="142" width="6" height="4"/>
+        <rect class="city-window-faint" x="762" y="202" width="6" height="4"/>
+        <rect class="city-window-dim" x="762" y="217" width="6" height="4"/>
+        <rect class="city-window-faint" x="776" y="97" width="6" height="4"/>
+        <rect class="city-window-dim" x="776" y="112" width="6" height="4"/>
+        <rect class="city-window-dim" x="776" y="172" width="6" height="4"/>
+        <rect class="city-window-faint" x="776" y="217" width="6" height="4"/>
+        <rect class="city-window-dim" x="776" y="292" width="6" height="4"/>
+        <rect class="city-window-dim" x="827" y="172" width="6" height="4"/>
+        <rect class="city-window-faint" x="827" y="202" width="6" height="4"/>
+        <rect class="city-window-dim" x="827" y="247" width="6" height="4"/>
+        <rect class="city-window-dim" x="855" y="292" width="6" height="4"/>
+        <rect class="city-window-faint" x="869" y="202" width="6" height="4"/>
+        <rect class="city-window-dim" x="869" y="262" width="6" height="4"/>
+        <rect class="city-window-faint" x="883" y="157" width="6" height="4"/>
+        <rect class="city-window-dim" x="883" y="277" width="6" height="4"/>
+        <rect class="city-window-faint" x="927" y="214" width="6" height="4"/>
+        <rect class="city-window-dim" x="927" y="244" width="6" height="4"/>
+        <rect class="city-window-faint" x="927" y="304" width="6" height="4"/>
+        <rect class="city-window-dim" x="941" y="109" width="6" height="4"/>
+        <rect class="city-window-dim" x="941" y="139" width="6" height="4"/>
+        <rect class="city-window-dim" x="941" y="184" width="6" height="4"/>
+        <rect class="city-window-faint" x="941" y="214" width="6" height="4"/>
+        <rect class="city-window-dim" x="941" y="244" width="6" height="4"/>
+        <rect class="city-window-faint" x="941" y="274" width="6" height="4"/>
+        <rect class="city-window-dim" x="955" y="154" width="6" height="4"/>
+        <rect class="city-window-dim" x="955" y="169" width="6" height="4"/>
+        <rect class="city-window-faint" x="955" y="304" width="6" height="4"/>
+        <rect class="city-window-dim" x="1002" y="157" width="6" height="4"/>
+        <rect class="city-window-faint" x="1002" y="172" width="6" height="4"/>
+        <rect class="city-window-dim" x="1002" y="187" width="6" height="4"/>
+        <rect class="city-window-faint" x="1002" y="232" width="6" height="4"/>
+        <rect class="city-window-faint" x="1002" y="277" width="6" height="4"/>
+        <rect class="city-window-dim" x="1016" y="172" width="6" height="4"/>
+        <rect class="city-window-dim" x="1016" y="217" width="6" height="4"/>
+        <rect class="city-window-dim" x="1016" y="232" width="6" height="4"/>
+        <rect class="city-window-dim" x="1030" y="172" width="6" height="4"/>
+        <rect class="city-window-dim" x="1030" y="217" width="6" height="4"/>
+        <rect class="city-window-dim" x="1030" y="277" width="6" height="4"/>
+        <rect class="city-window-dim" x="1044" y="277" width="6" height="4"/>
+        <rect class="city-window-dim" x="1097" y="152" width="6" height="4"/>
+        <rect class="city-window-dim" x="1097" y="242" width="6" height="4"/>
+        <rect class="city-window-faint" x="1097" y="272" width="6" height="4"/>
+        <rect class="city-window-faint" x="1097" y="287" width="6" height="4"/>
+        <rect class="city-window-dim" x="1111" y="137" width="6" height="4"/>
+        <rect class="city-window-dim" x="1111" y="167" width="6" height="4"/>
+        <rect class="city-window-dim" x="1111" y="287" width="6" height="4"/>
+        <rect class="city-window-dim" x="1162" y="302" width="6" height="4"/>
+        <rect class="city-window-faint" x="1176" y="137" width="6" height="4"/>
+        <rect class="city-window-dim" x="1176" y="152" width="6" height="4"/>
+        <rect class="city-window-faint" x="1176" y="197" width="6" height="4"/>
+        <rect class="city-window-faint" x="1176" y="212" width="6" height="4"/>
+        <rect class="city-window-dim" x="1176" y="302" width="6" height="4"/>
+        <rect class="city-window-faint" x="1190" y="137" width="6" height="4"/>
+        <rect class="city-window-faint" x="1190" y="167" width="6" height="4"/>
+        <rect class="city-window-dim" x="1190" y="182" width="6" height="4"/>
+        <rect class="city-window-dim" x="1190" y="272" width="6" height="4"/>
+        <rect class="city-window-faint" x="1204" y="197" width="6" height="4"/>
+        <rect class="city-window-dim" x="1204" y="212" width="6" height="4"/>
+        <rect class="city-window-dim" x="1204" y="287" width="6" height="4"/>
+        <rect class="city-window-dim" x="1218" y="137" width="6" height="4"/>
+        <rect class="city-window-faint" x="1218" y="152" width="6" height="4"/>
+        <rect class="city-window-dim" x="1218" y="212" width="6" height="4"/>
+        <rect class="city-window-faint" x="1267" y="224" width="6" height="4"/>
+        <rect class="city-window-faint" x="1267" y="239" width="6" height="4"/>
+        <rect class="city-window-faint" x="1267" y="269" width="6" height="4"/>
+        <rect class="city-window-faint" x="1267" y="284" width="6" height="4"/>
+        <rect class="city-window-dim" x="1267" y="299" width="6" height="4"/>
+        <rect class="city-window-dim" x="1281" y="104" width="6" height="4"/>
+        <rect class="city-window-dim" x="1295" y="179" width="6" height="4"/>
+        <rect class="city-window-faint" x="1295" y="194" width="6" height="4"/>
+        <rect class="city-window-dim" x="1295" y="269" width="6" height="4"/>
+        <rect class="city-window-dim" x="1337" y="197" width="6" height="4"/>
+        <rect class="city-window-dim" x="1337" y="212" width="6" height="4"/>
+        <rect class="city-window-dim" x="1337" y="272" width="6" height="4"/>
+        <rect class="city-window-dim" x="1351" y="227" width="6" height="4"/>
+        <rect class="city-window-faint" x="1351" y="302" width="6" height="4"/>
+        <rect class="city-window-dim" x="1365" y="197" width="6" height="4"/>
+        <rect class="city-window-faint" x="1393" y="182" width="6" height="4"/>
+        <rect class="city-window-faint" x="1393" y="257" width="6" height="4"/>
+        <rect class="city-window-dim" x="1407" y="167" width="6" height="4"/>
+        <rect class="city-window-faint" x="1407" y="227" width="6" height="4"/>
+        <rect class="city-window-dim" x="1407" y="272" width="6" height="4"/>
+        <rect class="city-window-dim" x="1421" y="167" width="6" height="4"/>
+        </g>
+        <g class="city-mid">
+        <rect x="30" y="185" width="90" height="135"/>
+        <rect x="150" y="135" width="60" height="185"/>
+        <rect x="235" y="200" width="100" height="120"/>
+        <rect x="360" y="110" width="55" height="210"/>
+        <rect x="440" y="175" width="95" height="145"/>
+        <rect x="560" y="142" width="65" height="178"/>
+        <rect x="650" y="195" width="105" height="125"/>
+        <rect x="780" y="105" width="58" height="215"/>
+        <rect x="865" y="180" width="92" height="140"/>
+        <rect x="980" y="138" width="62" height="182"/>
+        <rect x="1065" y="190" width="100" height="130"/>
+        <rect x="1190" y="118" width="56" height="202"/>
+        <rect x="1270" y="175" width="95" height="145"/>
+        <rect x="1385" y="145" width="55" height="175"/>
+        </g>
+        <g class="city-roofline">
+        <rect x="30" y="185" width="90" height="2"/>
+        <rect x="235" y="200" width="100" height="2"/>
+        <rect x="440" y="175" width="95" height="2"/>
+        <rect x="650" y="195" width="105" height="2"/>
+        <rect x="865" y="180" width="92" height="2"/>
+        <rect x="1065" y="190" width="100" height="2"/>
+        <rect x="1270" y="175" width="95" height="2"/>
+        </g>
+        <g>
+        <rect class="city-window-dim" x="37" y="197" width="6" height="4"/>
+        <rect class="city-window-dim" x="37" y="227" width="6" height="4"/>
+        <rect class="city-window" x="37" y="272" width="6" height="4"/>
+        <rect class="city-window-dim" x="37" y="302" width="6" height="4"/>
+        <rect class="city-window-dim" x="51" y="212" width="6" height="4"/>
+        <rect class="city-window" x="51" y="242" width="6" height="4"/>
+        <rect class="city-window" x="51" y="257" width="6" height="4"/>
+        <rect class="city-window-dim" x="51" y="272" width="6" height="4"/>
+        <rect class="city-window-dim" x="51" y="302" width="6" height="4"/>
+        <rect class="city-window" x="65" y="197" width="6" height="4"/>
+        <rect class="city-window-dim" x="65" y="212" width="6" height="4"/>
+        <rect class="city-window" x="65" y="227" width="6" height="4"/>
+        <rect class="city-window-dim" x="65" y="242" width="6" height="4"/>
+        <rect class="city-window-dim" x="65" y="257" width="6" height="4"/>
+        <rect class="city-window-dim" x="65" y="272" width="6" height="4"/>
+        <rect class="city-window" x="65" y="287" width="6" height="4"/>
+        <rect class="city-window" x="65" y="302" width="6" height="4"/>
+        <rect class="city-window-dim" x="79" y="212" width="6" height="4"/>
+        <rect class="city-window" x="79" y="227" width="6" height="4"/>
+        <rect class="city-window" x="79" y="257" width="6" height="4"/>
+        <rect class="city-window-dim" x="93" y="197" width="6" height="4"/>
+        <rect class="city-window-dim" x="93" y="257" width="6" height="4"/>
+        <rect class="city-window" x="93" y="272" width="6" height="4"/>
+        <rect class="city-window-dim" x="93" y="287" width="6" height="4"/>
+        <rect class="city-window-dim" x="93" y="302" width="6" height="4"/>
+        <rect class="city-window-dim" x="107" y="227" width="6" height="4"/>
+        <rect class="city-window-dim" x="107" y="242" width="6" height="4"/>
+        <rect class="city-window-dim" x="107" y="257" width="6" height="4"/>
+        <rect class="city-window-dim" x="107" y="287" width="6" height="4"/>
+        <rect class="city-window" x="157" y="147" width="6" height="4"/>
+        <rect class="city-window-dim" x="157" y="162" width="6" height="4"/>
+        <rect class="city-window" x="157" y="192" width="6" height="4"/>
+        <rect class="city-window-dim" x="157" y="282" width="6" height="4"/>
+        <rect class="city-window" x="157" y="297" width="6" height="4"/>
+        <rect class="city-window" x="171" y="192" width="6" height="4"/>
+        <rect class="city-window" x="171" y="207" width="6" height="4"/>
+        <rect class="city-window-dim" x="171" y="282" width="6" height="4"/>
+        <rect class="city-window" x="171" y="297" width="6" height="4"/>
+        <rect class="city-window-dim" x="185" y="177" width="6" height="4"/>
+        <rect class="city-window" x="185" y="222" width="6" height="4"/>
+        <rect class="city-window" x="185" y="252" width="6" height="4"/>
+        <rect class="city-window-dim" x="185" y="267" width="6" height="4"/>
+        <rect class="city-window" x="185" y="282" width="6" height="4"/>
+        <rect class="city-window-dim" x="185" y="297" width="6" height="4"/>
+        <rect class="city-window-dim" x="242" y="212" width="6" height="4"/>
+        <rect class="city-window" x="242" y="242" width="6" height="4"/>
+        <rect class="city-window" x="242" y="257" width="6" height="4"/>
+        <rect class="city-window" x="242" y="302" width="6" height="4"/>
+        <rect class="city-window" x="256" y="227" width="6" height="4"/>
+        <rect class="city-window-dim" x="256" y="242" width="6" height="4"/>
+        <rect class="city-window" x="256" y="257" width="6" height="4"/>
+        <rect class="city-window" x="256" y="272" width="6" height="4"/>
+        <rect class="city-window" x="256" y="287" width="6" height="4"/>
+        <rect class="city-window" x="270" y="242" width="6" height="4"/>
+        <rect class="city-window-dim" x="270" y="257" width="6" height="4"/>
+        <rect class="city-window" x="270" y="272" width="6" height="4"/>
+        <rect class="city-window-dim" x="270" y="287" width="6" height="4"/>
+        <rect class="city-window-dim" x="284" y="212" width="6" height="4"/>
+        <rect class="city-window" x="284" y="227" width="6" height="4"/>
+        <rect class="city-window" x="284" y="257" width="6" height="4"/>
+        <rect class="city-window-dim" x="284" y="272" width="6" height="4"/>
+        <rect class="city-window-dim" x="284" y="287" width="6" height="4"/>
+        <rect class="city-window" x="284" y="302" width="6" height="4"/>
+        <rect class="city-window-dim" x="298" y="212" width="6" height="4"/>
+        <rect class="city-window-dim" x="298" y="227" width="6" height="4"/>
+        <rect class="city-window" x="298" y="257" width="6" height="4"/>
+        <rect class="city-window" x="298" y="302" width="6" height="4"/>
+        <rect class="city-window-dim" x="312" y="212" width="6" height="4"/>
+        <rect class="city-window" x="312" y="257" width="6" height="4"/>
+        <rect class="city-window-dim" x="312" y="287" width="6" height="4"/>
+        <rect class="city-window" x="367" y="122" width="6" height="4"/>
+        <rect class="city-window" x="367" y="167" width="6" height="4"/>
+        <rect class="city-window" x="381" y="122" width="6" height="4"/>
+        <rect class="city-window-dim" x="381" y="137" width="6" height="4"/>
+        <rect class="city-window-dim" x="381" y="152" width="6" height="4"/>
+        <rect class="city-window" x="381" y="182" width="6" height="4"/>
+        <rect class="city-window" x="381" y="197" width="6" height="4"/>
+        <rect class="city-window" x="381" y="227" width="6" height="4"/>
+        <rect class="city-window" x="381" y="242" width="6" height="4"/>
+        <rect class="city-window-dim" x="381" y="257" width="6" height="4"/>
+        <rect class="city-window-dim" x="381" y="287" width="6" height="4"/>
+        <rect class="city-window" x="395" y="137" width="6" height="4"/>
+        <rect class="city-window-dim" x="395" y="167" width="6" height="4"/>
+        <rect class="city-window" x="395" y="212" width="6" height="4"/>
+        <rect class="city-window" x="395" y="227" width="6" height="4"/>
+        <rect class="city-window" x="395" y="257" width="6" height="4"/>
+        <rect class="city-window-dim" x="447" y="232" width="6" height="4"/>
+        <rect class="city-window" x="447" y="262" width="6" height="4"/>
+        <rect class="city-window-dim" x="447" y="277" width="6" height="4"/>
+        <rect class="city-window-dim" x="447" y="292" width="6" height="4"/>
+        <rect class="city-window-dim" x="461" y="217" width="6" height="4"/>
+        <rect class="city-window" x="461" y="262" width="6" height="4"/>
+        <rect class="city-window" x="461" y="277" width="6" height="4"/>
+        <rect class="city-window" x="461" y="292" width="6" height="4"/>
+        <rect class="city-window-dim" x="475" y="202" width="6" height="4"/>
+        <rect class="city-window" x="475" y="232" width="6" height="4"/>
+        <rect class="city-window" x="475" y="247" width="6" height="4"/>
+        <rect class="city-window" x="475" y="292" width="6" height="4"/>
+        <rect class="city-window-dim" x="489" y="187" width="6" height="4"/>
+        <rect class="city-window" x="489" y="202" width="6" height="4"/>
+        <rect class="city-window" x="489" y="232" width="6" height="4"/>
+        <rect class="city-window-dim" x="489" y="247" width="6" height="4"/>
+        <rect class="city-window" x="489" y="262" width="6" height="4"/>
+        <rect class="city-window" x="489" y="292" width="6" height="4"/>
+        <rect class="city-window-dim" x="503" y="187" width="6" height="4"/>
+        <rect class="city-window-dim" x="503" y="247" width="6" height="4"/>
+        <rect class="city-window" x="503" y="277" width="6" height="4"/>
+        <rect class="city-window-dim" x="503" y="292" width="6" height="4"/>
+        <rect class="city-window" x="517" y="187" width="6" height="4"/>
+        <rect class="city-window-dim" x="517" y="202" width="6" height="4"/>
+        <rect class="city-window-dim" x="517" y="217" width="6" height="4"/>
+        <rect class="city-window" x="517" y="247" width="6" height="4"/>
+        <rect class="city-window-dim" x="517" y="262" width="6" height="4"/>
+        <rect class="city-window-dim" x="517" y="277" width="6" height="4"/>
+        <rect class="city-window" x="567" y="169" width="6" height="4"/>
+        <rect class="city-window-dim" x="567" y="199" width="6" height="4"/>
+        <rect class="city-window" x="567" y="229" width="6" height="4"/>
+        <rect class="city-window-dim" x="567" y="244" width="6" height="4"/>
+        <rect class="city-window" x="567" y="259" width="6" height="4"/>
+        <rect class="city-window" x="567" y="274" width="6" height="4"/>
+        <rect class="city-window-dim" x="567" y="304" width="6" height="4"/>
+        <rect class="city-window-dim" x="581" y="184" width="6" height="4"/>
+        <rect class="city-window" x="581" y="199" width="6" height="4"/>
+        <rect class="city-window" x="581" y="229" width="6" height="4"/>
+        <rect class="city-window" x="581" y="244" width="6" height="4"/>
+        <rect class="city-window-dim" x="581" y="259" width="6" height="4"/>
+        <rect class="city-window" x="581" y="274" width="6" height="4"/>
+        <rect class="city-window" x="581" y="304" width="6" height="4"/>
+        <rect class="city-window" x="595" y="154" width="6" height="4"/>
+        <rect class="city-window" x="595" y="184" width="6" height="4"/>
+        <rect class="city-window" x="595" y="199" width="6" height="4"/>
+        <rect class="city-window" x="595" y="229" width="6" height="4"/>
+        <rect class="city-window" x="595" y="259" width="6" height="4"/>
+        <rect class="city-window" x="595" y="274" width="6" height="4"/>
+        <rect class="city-window" x="595" y="289" width="6" height="4"/>
+        <rect class="city-window" x="595" y="304" width="6" height="4"/>
+        <rect class="city-window" x="609" y="169" width="6" height="4"/>
+        <rect class="city-window" x="609" y="184" width="6" height="4"/>
+        <rect class="city-window" x="609" y="214" width="6" height="4"/>
+        <rect class="city-window" x="609" y="229" width="6" height="4"/>
+        <rect class="city-window" x="609" y="244" width="6" height="4"/>
+        <rect class="city-window" x="609" y="259" width="6" height="4"/>
+        <rect class="city-window-dim" x="609" y="289" width="6" height="4"/>
+        <rect class="city-window-dim" x="657" y="207" width="6" height="4"/>
+        <rect class="city-window-dim" x="657" y="237" width="6" height="4"/>
+        <rect class="city-window" x="657" y="252" width="6" height="4"/>
+        <rect class="city-window-dim" x="657" y="267" width="6" height="4"/>
+        <rect class="city-window" x="657" y="297" width="6" height="4"/>
+        <rect class="city-window-dim" x="671" y="237" width="6" height="4"/>
+        <rect class="city-window-dim" x="671" y="252" width="6" height="4"/>
+        <rect class="city-window" x="671" y="282" width="6" height="4"/>
+        <rect class="city-window-dim" x="671" y="297" width="6" height="4"/>
+        <rect class="city-window-dim" x="685" y="207" width="6" height="4"/>
+        <rect class="city-window-dim" x="685" y="237" width="6" height="4"/>
+        <rect class="city-window" x="685" y="267" width="6" height="4"/>
+        <rect class="city-window" x="685" y="282" width="6" height="4"/>
+        <rect class="city-window" x="699" y="207" width="6" height="4"/>
+        <rect class="city-window" x="699" y="222" width="6" height="4"/>
+        <rect class="city-window-dim" x="699" y="252" width="6" height="4"/>
+        <rect class="city-window" x="699" y="267" width="6" height="4"/>
+        <rect class="city-window-dim" x="699" y="297" width="6" height="4"/>
+        <rect class="city-window-dim" x="713" y="207" width="6" height="4"/>
+        <rect class="city-window" x="713" y="237" width="6" height="4"/>
+        <rect class="city-window" x="727" y="222" width="6" height="4"/>
+        <rect class="city-window-dim" x="727" y="237" width="6" height="4"/>
+        <rect class="city-window" x="727" y="252" width="6" height="4"/>
+        <rect class="city-window" x="727" y="267" width="6" height="4"/>
+        <rect class="city-window-dim" x="727" y="282" width="6" height="4"/>
+        <rect class="city-window-dim" x="727" y="297" width="6" height="4"/>
+        <rect class="city-window" x="741" y="207" width="6" height="4"/>
+        <rect class="city-window-dim" x="741" y="222" width="6" height="4"/>
+        <rect class="city-window-dim" x="741" y="252" width="6" height="4"/>
+        <rect class="city-window" x="741" y="267" width="6" height="4"/>
+        <rect class="city-window" x="741" y="297" width="6" height="4"/>
+        <rect class="city-window" x="787" y="132" width="6" height="4"/>
+        <rect class="city-window" x="787" y="147" width="6" height="4"/>
+        <rect class="city-window-dim" x="787" y="192" width="6" height="4"/>
+        <rect class="city-window-dim" x="787" y="207" width="6" height="4"/>
+        <rect class="city-window-dim" x="787" y="222" width="6" height="4"/>
+        <rect class="city-window" x="787" y="237" width="6" height="4"/>
+        <rect class="city-window" x="787" y="252" width="6" height="4"/>
+        <rect class="city-window" x="787" y="267" width="6" height="4"/>
+        <rect class="city-window" x="801" y="177" width="6" height="4"/>
+        <rect class="city-window-dim" x="801" y="192" width="6" height="4"/>
+        <rect class="city-window" x="801" y="207" width="6" height="4"/>
+        <rect class="city-window" x="801" y="237" width="6" height="4"/>
+        <rect class="city-window" x="801" y="252" width="6" height="4"/>
+        <rect class="city-window-dim" x="801" y="282" width="6" height="4"/>
+        <rect class="city-window-dim" x="815" y="117" width="6" height="4"/>
+        <rect class="city-window" x="815" y="222" width="6" height="4"/>
+        <rect class="city-window" x="815" y="267" width="6" height="4"/>
+        <rect class="city-window" x="815" y="282" width="6" height="4"/>
+        <rect class="city-window" x="872" y="192" width="6" height="4"/>
+        <rect class="city-window" x="872" y="207" width="6" height="4"/>
+        <rect class="city-window" x="872" y="222" width="6" height="4"/>
+        <rect class="city-window-dim" x="872" y="252" width="6" height="4"/>
+        <rect class="city-window-dim" x="872" y="267" width="6" height="4"/>
+        <rect class="city-window" x="872" y="282" width="6" height="4"/>
+        <rect class="city-window" x="886" y="192" width="6" height="4"/>
+        <rect class="city-window" x="886" y="222" width="6" height="4"/>
+        <rect class="city-window-dim" x="886" y="237" width="6" height="4"/>
+        <rect class="city-window" x="886" y="252" width="6" height="4"/>
+        <rect class="city-window-dim" x="886" y="267" width="6" height="4"/>
+        <rect class="city-window-dim" x="900" y="192" width="6" height="4"/>
+        <rect class="city-window" x="900" y="207" width="6" height="4"/>
+        <rect class="city-window" x="900" y="222" width="6" height="4"/>
+        <rect class="city-window" x="900" y="237" width="6" height="4"/>
+        <rect class="city-window" x="900" y="282" width="6" height="4"/>
+        <rect class="city-window-dim" x="914" y="192" width="6" height="4"/>
+        <rect class="city-window-dim" x="914" y="207" width="6" height="4"/>
+        <rect class="city-window" x="914" y="222" width="6" height="4"/>
+        <rect class="city-window" x="914" y="252" width="6" height="4"/>
+        <rect class="city-window-dim" x="914" y="267" width="6" height="4"/>
+        <rect class="city-window" x="914" y="282" width="6" height="4"/>
+        <rect class="city-window-dim" x="928" y="192" width="6" height="4"/>
+        <rect class="city-window" x="928" y="222" width="6" height="4"/>
+        <rect class="city-window-dim" x="928" y="237" width="6" height="4"/>
+        <rect class="city-window-dim" x="928" y="252" width="6" height="4"/>
+        <rect class="city-window" x="928" y="267" width="6" height="4"/>
+        <rect class="city-window" x="928" y="282" width="6" height="4"/>
+        <rect class="city-window" x="928" y="297" width="6" height="4"/>
+        <rect class="city-window" x="942" y="192" width="6" height="4"/>
+        <rect class="city-window" x="942" y="207" width="6" height="4"/>
+        <rect class="city-window" x="942" y="222" width="6" height="4"/>
+        <rect class="city-window" x="942" y="237" width="6" height="4"/>
+        <rect class="city-window" x="942" y="267" width="6" height="4"/>
+        <rect class="city-window-dim" x="942" y="282" width="6" height="4"/>
+        <rect class="city-window-dim" x="987" y="150" width="6" height="4"/>
+        <rect class="city-window" x="987" y="195" width="6" height="4"/>
+        <rect class="city-window" x="987" y="225" width="6" height="4"/>
+        <rect class="city-window" x="987" y="240" width="6" height="4"/>
+        <rect class="city-window-dim" x="987" y="285" width="6" height="4"/>
+        <rect class="city-window-dim" x="987" y="300" width="6" height="4"/>
+        <rect class="city-window-dim" x="1001" y="165" width="6" height="4"/>
+        <rect class="city-window" x="1001" y="180" width="6" height="4"/>
+        <rect class="city-window" x="1001" y="195" width="6" height="4"/>
+        <rect class="city-window" x="1001" y="210" width="6" height="4"/>
+        <rect class="city-window" x="1001" y="285" width="6" height="4"/>
+        <rect class="city-window" x="1015" y="150" width="6" height="4"/>
+        <rect class="city-window-dim" x="1015" y="165" width="6" height="4"/>
+        <rect class="city-window-dim" x="1015" y="180" width="6" height="4"/>
+        <rect class="city-window-dim" x="1015" y="195" width="6" height="4"/>
+        <rect class="city-window" x="1015" y="210" width="6" height="4"/>
+        <rect class="city-window" x="1015" y="225" width="6" height="4"/>
+        <rect class="city-window" x="1015" y="240" width="6" height="4"/>
+        <rect class="city-window" x="1015" y="255" width="6" height="4"/>
+        <rect class="city-window-dim" x="1015" y="270" width="6" height="4"/>
+        <rect class="city-window" x="1015" y="285" width="6" height="4"/>
+        <rect class="city-window-dim" x="1015" y="300" width="6" height="4"/>
+        <rect class="city-window" x="1029" y="165" width="6" height="4"/>
+        <rect class="city-window" x="1029" y="225" width="6" height="4"/>
+        <rect class="city-window" x="1029" y="240" width="6" height="4"/>
+        <rect class="city-window" x="1029" y="255" width="6" height="4"/>
+        <rect class="city-window" x="1072" y="202" width="6" height="4"/>
+        <rect class="city-window-dim" x="1072" y="232" width="6" height="4"/>
+        <rect class="city-window-dim" x="1072" y="277" width="6" height="4"/>
+        <rect class="city-window-dim" x="1086" y="202" width="6" height="4"/>
+        <rect class="city-window" x="1086" y="277" width="6" height="4"/>
+        <rect class="city-window" x="1086" y="292" width="6" height="4"/>
+        <rect class="city-window-dim" x="1100" y="202" width="6" height="4"/>
+        <rect class="city-window" x="1100" y="217" width="6" height="4"/>
+        <rect class="city-window" x="1100" y="232" width="6" height="4"/>
+        <rect class="city-window" x="1100" y="247" width="6" height="4"/>
+        <rect class="city-window-dim" x="1100" y="262" width="6" height="4"/>
+        <rect class="city-window" x="1100" y="277" width="6" height="4"/>
+        <rect class="city-window-dim" x="1100" y="292" width="6" height="4"/>
+        <rect class="city-window" x="1114" y="202" width="6" height="4"/>
+        <rect class="city-window" x="1114" y="232" width="6" height="4"/>
+        <rect class="city-window-dim" x="1114" y="292" width="6" height="4"/>
+        <rect class="city-window-dim" x="1128" y="202" width="6" height="4"/>
+        <rect class="city-window-dim" x="1128" y="217" width="6" height="4"/>
+        <rect class="city-window-dim" x="1128" y="262" width="6" height="4"/>
+        <rect class="city-window" x="1142" y="202" width="6" height="4"/>
+        <rect class="city-window-dim" x="1142" y="217" width="6" height="4"/>
+        <rect class="city-window" x="1142" y="232" width="6" height="4"/>
+        <rect class="city-window" x="1142" y="247" width="6" height="4"/>
+        <rect class="city-window" x="1142" y="262" width="6" height="4"/>
+        <rect class="city-window" x="1142" y="292" width="6" height="4"/>
+        <rect class="city-window-dim" x="1197" y="145" width="6" height="4"/>
+        <rect class="city-window" x="1197" y="160" width="6" height="4"/>
+        <rect class="city-window" x="1197" y="175" width="6" height="4"/>
+        <rect class="city-window-dim" x="1197" y="190" width="6" height="4"/>
+        <rect class="city-window-dim" x="1197" y="205" width="6" height="4"/>
+        <rect class="city-window-dim" x="1197" y="220" width="6" height="4"/>
+        <rect class="city-window" x="1197" y="235" width="6" height="4"/>
+        <rect class="city-window-dim" x="1197" y="250" width="6" height="4"/>
+        <rect class="city-window" x="1197" y="265" width="6" height="4"/>
+        <rect class="city-window-dim" x="1197" y="280" width="6" height="4"/>
+        <rect class="city-window" x="1197" y="295" width="6" height="4"/>
+        <rect class="city-window-dim" x="1211" y="130" width="6" height="4"/>
+        <rect class="city-window" x="1211" y="175" width="6" height="4"/>
+        <rect class="city-window" x="1211" y="190" width="6" height="4"/>
+        <rect class="city-window" x="1211" y="220" width="6" height="4"/>
+        <rect class="city-window" x="1211" y="295" width="6" height="4"/>
+        <rect class="city-window-dim" x="1225" y="130" width="6" height="4"/>
+        <rect class="city-window" x="1225" y="145" width="6" height="4"/>
+        <rect class="city-window" x="1225" y="160" width="6" height="4"/>
+        <rect class="city-window-dim" x="1225" y="205" width="6" height="4"/>
+        <rect class="city-window-dim" x="1225" y="220" width="6" height="4"/>
+        <rect class="city-window" x="1225" y="250" width="6" height="4"/>
+        <rect class="city-window-dim" x="1225" y="265" width="6" height="4"/>
+        <rect class="city-window-dim" x="1277" y="247" width="6" height="4"/>
+        <rect class="city-window-dim" x="1277" y="277" width="6" height="4"/>
+        <rect class="city-window-dim" x="1277" y="292" width="6" height="4"/>
+        <rect class="city-window-dim" x="1291" y="187" width="6" height="4"/>
+        <rect class="city-window" x="1291" y="202" width="6" height="4"/>
+        <rect class="city-window" x="1291" y="217" width="6" height="4"/>
+        <rect class="city-window-dim" x="1291" y="247" width="6" height="4"/>
+        <rect class="city-window" x="1291" y="262" width="6" height="4"/>
+        <rect class="city-window" x="1291" y="277" width="6" height="4"/>
+        <rect class="city-window" x="1291" y="292" width="6" height="4"/>
+        <rect class="city-window" x="1305" y="202" width="6" height="4"/>
+        <rect class="city-window" x="1305" y="262" width="6" height="4"/>
+        <rect class="city-window" x="1305" y="277" width="6" height="4"/>
+        <rect class="city-window" x="1319" y="187" width="6" height="4"/>
+        <rect class="city-window-dim" x="1319" y="202" width="6" height="4"/>
+        <rect class="city-window" x="1319" y="217" width="6" height="4"/>
+        <rect class="city-window" x="1319" y="277" width="6" height="4"/>
+        <rect class="city-window-dim" x="1319" y="292" width="6" height="4"/>
+        <rect class="city-window-dim" x="1333" y="187" width="6" height="4"/>
+        <rect class="city-window" x="1333" y="217" width="6" height="4"/>
+        <rect class="city-window-dim" x="1333" y="232" width="6" height="4"/>
+        <rect class="city-window" x="1333" y="247" width="6" height="4"/>
+        <rect class="city-window-dim" x="1333" y="277" width="6" height="4"/>
+        <rect class="city-window-dim" x="1333" y="292" width="6" height="4"/>
+        <rect class="city-window" x="1347" y="187" width="6" height="4"/>
+        <rect class="city-window-dim" x="1347" y="217" width="6" height="4"/>
+        <rect class="city-window-dim" x="1347" y="247" width="6" height="4"/>
+        <rect class="city-window-dim" x="1347" y="292" width="6" height="4"/>
+        <rect class="city-window" x="1392" y="157" width="6" height="4"/>
+        <rect class="city-window-dim" x="1392" y="172" width="6" height="4"/>
+        <rect class="city-window-dim" x="1392" y="187" width="6" height="4"/>
+        <rect class="city-window" x="1392" y="247" width="6" height="4"/>
+        <rect class="city-window" x="1392" y="262" width="6" height="4"/>
+        <rect class="city-window-dim" x="1406" y="157" width="6" height="4"/>
+        <rect class="city-window" x="1406" y="172" width="6" height="4"/>
+        <rect class="city-window" x="1406" y="217" width="6" height="4"/>
+        <rect class="city-window" x="1406" y="247" width="6" height="4"/>
+        <rect class="city-window" x="1406" y="277" width="6" height="4"/>
+        <rect class="city-window-dim" x="1406" y="292" width="6" height="4"/>
+        <rect class="city-window" x="1420" y="172" width="6" height="4"/>
+        <rect class="city-window-dim" x="1420" y="187" width="6" height="4"/>
+        <rect class="city-window" x="1420" y="202" width="6" height="4"/>
+        <rect class="city-window" x="1420" y="217" width="6" height="4"/>
+        <rect class="city-window" x="1420" y="232" width="6" height="4"/>
+        <rect class="city-window-dim" x="1420" y="247" width="6" height="4"/>
+        <rect class="city-window" x="1420" y="262" width="6" height="4"/>
+        <rect class="city-window-dim" x="1420" y="292" width="6" height="4"/>
+        </g>
+        <g class="city-front">
+        <rect x="0" y="238" width="130" height="82"/>
+        <rect x="140" y="252" width="150" height="68"/>
+        <rect x="300" y="232" width="120" height="88"/>
+        <rect x="430" y="258" width="160" height="62"/>
+        <rect x="600" y="238" width="130" height="82"/>
+        <rect x="740" y="256" width="150" height="64"/>
+        <rect x="900" y="236" width="125" height="84"/>
+        <rect x="1035" y="254" width="155" height="66"/>
+        <rect x="1200" y="240" width="130" height="80"/>
+        <rect x="1340" y="256" width="100" height="64"/>
+        </g>
+        <g>
+        <rect class="city-window" x="7" y="250" width="6" height="4"/>
+        <rect class="city-window" x="21" y="265" width="6" height="4"/>
+        <rect class="city-window-dim" x="21" y="280" width="6" height="4"/>
+        <rect class="city-window" x="35" y="265" width="6" height="4"/>
+        <rect class="city-window" x="49" y="250" width="6" height="4"/>
+        <rect class="city-window" x="49" y="265" width="6" height="4"/>
+        <rect class="city-window-dim" x="49" y="280" width="6" height="4"/>
+        <rect class="city-window" x="63" y="295" width="6" height="4"/>
+        <rect class="city-window-dim" x="77" y="250" width="6" height="4"/>
+        <rect class="city-window-dim" x="77" y="265" width="6" height="4"/>
+        <rect class="city-window" x="77" y="280" width="6" height="4"/>
+        <rect class="city-window" x="91" y="280" width="6" height="4"/>
+        <rect class="city-window" x="105" y="265" width="6" height="4"/>
+        <rect class="city-window-dim" x="105" y="295" width="6" height="4"/>
+        <rect class="city-window" x="147" y="264" width="6" height="4"/>
+        <rect class="city-window-dim" x="161" y="264" width="6" height="4"/>
+        <rect class="city-window" x="175" y="264" width="6" height="4"/>
+        <rect class="city-window" x="175" y="294" width="6" height="4"/>
+        <rect class="city-window-dim" x="217" y="294" width="6" height="4"/>
+        <rect class="city-window" x="231" y="264" width="6" height="4"/>
+        <rect class="city-window-dim" x="231" y="294" width="6" height="4"/>
+        <rect class="city-window-dim" x="259" y="279" width="6" height="4"/>
+        <rect class="city-window" x="259" y="294" width="6" height="4"/>
+        <rect class="city-window" x="273" y="294" width="6" height="4"/>
+        <rect class="city-window" x="321" y="244" width="6" height="4"/>
+        <rect class="city-window-dim" x="321" y="289" width="6" height="4"/>
+        <rect class="city-window" x="321" y="304" width="6" height="4"/>
+        <rect class="city-window" x="335" y="244" width="6" height="4"/>
+        <rect class="city-window" x="335" y="259" width="6" height="4"/>
+        <rect class="city-window-dim" x="349" y="259" width="6" height="4"/>
+        <rect class="city-window" x="349" y="289" width="6" height="4"/>
+        <rect class="city-window-dim" x="363" y="274" width="6" height="4"/>
+        <rect class="city-window" x="363" y="289" width="6" height="4"/>
+        <rect class="city-window" x="405" y="259" width="6" height="4"/>
+        <rect class="city-window-dim" x="437" y="270" width="6" height="4"/>
+        <rect class="city-window" x="437" y="285" width="6" height="4"/>
+        <rect class="city-window-dim" x="451" y="270" width="6" height="4"/>
+        <rect class="city-window" x="465" y="300" width="6" height="4"/>
+        <rect class="city-window-dim" x="493" y="270" width="6" height="4"/>
+        <rect class="city-window" x="507" y="270" width="6" height="4"/>
+        <rect class="city-window" x="535" y="270" width="6" height="4"/>
+        <rect class="city-window" x="549" y="270" width="6" height="4"/>
+        <rect class="city-window" x="549" y="285" width="6" height="4"/>
+        <rect class="city-window-dim" x="621" y="280" width="6" height="4"/>
+        <rect class="city-window" x="621" y="295" width="6" height="4"/>
+        <rect class="city-window-dim" x="649" y="250" width="6" height="4"/>
+        <rect class="city-window-dim" x="649" y="265" width="6" height="4"/>
+        <rect class="city-window-dim" x="663" y="250" width="6" height="4"/>
+        <rect class="city-window" x="663" y="295" width="6" height="4"/>
+        <rect class="city-window" x="691" y="250" width="6" height="4"/>
+        <rect class="city-window-dim" x="691" y="295" width="6" height="4"/>
+        <rect class="city-window-dim" x="705" y="250" width="6" height="4"/>
+        <rect class="city-window" x="705" y="265" width="6" height="4"/>
+        <rect class="city-window" x="775" y="268" width="6" height="4"/>
+        <rect class="city-window" x="775" y="283" width="6" height="4"/>
+        <rect class="city-window" x="775" y="298" width="6" height="4"/>
+        <rect class="city-window" x="789" y="283" width="6" height="4"/>
+        <rect class="city-window" x="817" y="283" width="6" height="4"/>
+        <rect class="city-window-dim" x="817" y="298" width="6" height="4"/>
+        <rect class="city-window" x="845" y="298" width="6" height="4"/>
+        <rect class="city-window-dim" x="873" y="283" width="6" height="4"/>
+        <rect class="city-window" x="907" y="278" width="6" height="4"/>
+        <rect class="city-window" x="921" y="278" width="6" height="4"/>
+        <rect class="city-window" x="921" y="293" width="6" height="4"/>
+        <rect class="city-window" x="935" y="248" width="6" height="4"/>
+        <rect class="city-window" x="935" y="263" width="6" height="4"/>
+        <rect class="city-window-dim" x="935" y="278" width="6" height="4"/>
+        <rect class="city-window-dim" x="949" y="248" width="6" height="4"/>
+        <rect class="city-window-dim" x="963" y="248" width="6" height="4"/>
+        <rect class="city-window" x="963" y="293" width="6" height="4"/>
+        <rect class="city-window-dim" x="977" y="248" width="6" height="4"/>
+        <rect class="city-window" x="977" y="293" width="6" height="4"/>
+        <rect class="city-window" x="991" y="263" width="6" height="4"/>
+        <rect class="city-window" x="1042" y="266" width="6" height="4"/>
+        <rect class="city-window" x="1042" y="281" width="6" height="4"/>
+        <rect class="city-window-dim" x="1084" y="281" width="6" height="4"/>
+        <rect class="city-window-dim" x="1112" y="266" width="6" height="4"/>
+        <rect class="city-window" x="1112" y="281" width="6" height="4"/>
+        <rect class="city-window" x="1112" y="296" width="6" height="4"/>
+        <rect class="city-window" x="1126" y="296" width="6" height="4"/>
+        <rect class="city-window-dim" x="1140" y="281" width="6" height="4"/>
+        <rect class="city-window" x="1168" y="266" width="6" height="4"/>
+        <rect class="city-window-dim" x="1207" y="252" width="6" height="4"/>
+        <rect class="city-window-dim" x="1207" y="282" width="6" height="4"/>
+        <rect class="city-window-dim" x="1207" y="297" width="6" height="4"/>
+        <rect class="city-window" x="1221" y="252" width="6" height="4"/>
+        <rect class="city-window-dim" x="1221" y="267" width="6" height="4"/>
+        <rect class="city-window-dim" x="1235" y="252" width="6" height="4"/>
+        <rect class="city-window" x="1235" y="282" width="6" height="4"/>
+        <rect class="city-window-dim" x="1235" y="297" width="6" height="4"/>
+        <rect class="city-window-dim" x="1249" y="267" width="6" height="4"/>
+        <rect class="city-window-dim" x="1263" y="282" width="6" height="4"/>
+        <rect class="city-window" x="1263" y="297" width="6" height="4"/>
+        <rect class="city-window-dim" x="1277" y="297" width="6" height="4"/>
+        <rect class="city-window" x="1291" y="267" width="6" height="4"/>
+        <rect class="city-window" x="1375" y="283" width="6" height="4"/>
+        <rect class="city-window" x="1389" y="268" width="6" height="4"/>
+        <rect class="city-window-dim" x="1403" y="268" width="6" height="4"/>
+        <rect class="city-window" x="1417" y="268" width="6" height="4"/>
+        </g>
+        <circle class="city-beacon" cx="443" cy="13" r="2.5" opacity="0.95"/>
+        <circle class="city-beacon" cx="779" cy="21" r="2.5" opacity="0.85"/>
+        <circle class="city-beacon" cx="1113" cy="33" r="2.5" opacity="0.9"/>
+        </svg>
+    </div>
+  </div>
+
+  <section class="audience-band">
+    <div class="section-inner">
+      <div class="section-eyebrow">Who we serve</div>
+      <h2 class="section-title">Built for physicians. Structured for investors.</h2>
+      <p class="section-sub">AMD Global sits at the intersection of medicine and development — a rare combination that lets us speak both languages fluently.</p>
+      <div class="audience-grid">
+        <div class="audience-card">
+          <span class="audience-tag">// For physicians</span>
+          <h3>Your practice. Your facility. Developed by physicians.</h3>
+          <p>You know what your patients need — we know how to build it. AMD partners with physicians and physician groups who want to develop their own facilities, from free-standing emergency centers to full hospitals.</p>
+          <ul class="audience-list">
+            <li>Physician-led design — clinical workflows built in from day one</li>
+            <li>Full development management: site, design, construction, licensing</li>
+            <li>Turnkey operations support after opening: billing, EHR, staffing</li>
+          </ul>
+          <span class="audience-cta" onclick="showPage('contact')">Start a development conversation →</span>
+        </div>
+        <div class="audience-card">
+          <span class="audience-tag">// For investors & developers</span>
+          <h3>Proven healthcare assets with operational depth.</h3>
+          <p>Healthcare infrastructure is one of the most resilient asset classes in the market — and AMD is a vertically integrated operator with a track record of delivering and running facilities that perform.</p>
+          <ul class="audience-list">
+            <li>Completed, operational developments — not just plans</li>
+            <li>Vertically integrated: development, management, and operations under one roof</li>
+            <li>Diversified exposure across healthcare, commercial real estate, energy, and occupational care</li>
+          </ul>
+          <span class="audience-cta" onclick="showPage('investments')">Explore investment services →</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-inner">
+      <div class="about-split">
+        <div>
+          <div class="section-eyebrow">Our story</div>
+          <h2 class="section-title">A history of firsts</h2>
+          <p class="about-lead">AMD Global's story is a <strong>success story of physician-driven development</strong> — a Houston-based firm that has spent years turning clinical insight into completed, operating healthcare infrastructure.</p>
+          <p class="about-body">What began as a physician-centric vision has grown into a full-service development and investment firm. Along the way, AMD pioneered new healthcare delivery formats — developing one of the first free-standing emergency centers, one of the first micro-hospitals, and Class A medical office space — while expanding into urgent care, imaging, wound care, and medical specialties. Every project since has carried the same DNA: facilities designed by people who practice medicine, built to the very highest ethical, moral, and qualitative standards.</p>
+        </div>
+        <div>
+          <div class="tech-frame"><img src="about.jpg" alt="AMD Global — Avail Health facility"></div>
+          <div class="frame-caption">Image placement · about AMD Global</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="milestones">
+    <div class="tech-grid"></div>
+    <div class="section-inner" style="position:relative;z-index:1;">
+      <div class="section-eyebrow" style="color:var(--accent)">Track record</div>
+      <h2 class="section-title">What we've already delivered</h2>
+      <p class="section-sub">Trust is earned by finishing what you start. These are completed AMD developments — proof that your next project is in experienced hands.</p>
+      <div class="milestone-grid">
+        <div class="milestone">
+          <span class="milestone-badge">Pioneer</span>
+          <h3>Founded one of the first free-standing emergency centers</h3>
+          <p>An early mover in the FSEC model — bringing emergency-level care into the community, outside traditional hospital campuses.</p>
+        </div>
+        <div class="milestone">
+          <span class="milestone-badge">Pioneer</span>
+          <h3>Developed one of the first micro-hospitals — Louisiana</h3>
+          <p>A compact, full-capability hospital format engineered for faster delivery and community-scale access to inpatient care.</p>
+        </div>
+        <div class="milestone">
+          <span class="milestone-badge">Delivered</span>
+          <h3>Hedwig Place — Class A office development</h3>
+          <p>AMD's premium Class A office building, designed and delivered to institutional standards — home to physician practices, clinical services, and professional tenants.</p>
+        </div>
+        <div class="milestone">
+          <span class="milestone-badge">Operating</span>
+          <h3>Heights Hospital — licensed 2018</h3>
+          <p>AMD's flagship full-service hospital: inpatient care, oncology and infusion, wound care, sleep labs, and outpatient services.</p>
+        </div>
+        <div class="milestone">
+          <span class="milestone-badge">Expanding</span>
+          <h3>Urgent care & imaging centers</h3>
+          <p>Active expansion into rapid-access outpatient care and advanced diagnostic imaging, integrated with AMD's facility network.</p>
+        </div>
+        <div class="milestone">
+          <span class="milestone-badge">Expanding</span>
+          <h3>Wound care & medical specialties</h3>
+          <p>24/7 specialized wound care centers and a growing roster of medical specialty services staffed by board-certified physicians.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--off-white);">
+    <div class="section-inner">
+      <div class="section-eyebrow">Our core focus</div>
+      <h2 class="section-title">Healthcare development, end to end</h2>
+      <p class="section-sub">Healthcare development defines AMD Global. We control every phase of the lifecycle — faster delivery, lower risk, and facilities engineered around patient care from day one.</p>
+      <div class="process-row">
+        <div class="process-step"><div class="process-num">PHASE 01</div><h3>Site & market analysis</h3><p>Identifying high-demand communities where new healthcare infrastructure delivers the greatest impact and value.</p></div>
+        <div class="process-step"><div class="process-num">PHASE 02</div><h3>Design & engineering</h3><p>Physician-informed clinical layouts, advanced systems, and future-ready technology infrastructure.</p></div>
+        <div class="process-step"><div class="process-num">PHASE 03</div><h3>Development & construction</h3><p>Full development management from groundbreaking through commissioning, on schedule and to specification.</p></div>
+        <div class="process-step"><div class="process-num">PHASE 04</div><h3>Licensing & compliance</h3><p>Navigating healthcare licensure, regulatory approval, and accreditation to bring facilities online.</p></div>
+        <div class="process-step"><div class="process-num">PHASE 05</div><h3>Operations & management</h3><p>Ongoing facility, business office, and revenue cycle management that keeps every asset performing at its peak.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-inner">
+      <div class="section-eyebrow">What we do</div>
+      <h2 class="section-title">Our portfolio at a glance</h2>
+      <p class="section-sub">Healthcare development at the core — supported by a diversified, vertically integrated portfolio.</p>
+      <div class="sector-row">
+        <a class="sector-tile" onclick="showPage('realestate')">
+          <div class="value-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+          <h3>Healthcare real estate</h3>
+          <p>Hospitals, emergency centers, urgent care, imaging, and wound care</p>
+        </a>
+        <a class="sector-tile" onclick="showPage('services')">
+          <div class="value-icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+          <h3>Management services</h3>
+          <p>Full-service operations, billing, and facility management</p>
+        </a>
+        <a class="sector-tile" onclick="showPage('investments')">
+          <div class="value-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+          <h3>Investments</h3>
+          <p>Investment services for partners and third-party investors</p>
+        </a>
+        <a class="sector-tile" onclick="showPage('developments')">
+          <div class="value-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8M8 12h8"/></svg></div>
+          <h3>Active developments</h3>
+          <p>Healthcare projects in motion across our growing portfolio</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ═══ ABOUT THE CEO ═══ -->
+<div class="page" id="page-ceo">
+  <div class="page-header">
+    <div class="tech-grid"></div>
+    <div class="page-header-inner">
+      <div class="hero-eyebrow"><span class="pulse-dot"></span>Leadership</div>
+      <h1>About the CEO</h1>
+      <p>The physician-founder behind AMD Global's development model.</p>
+    </div>
+  </div>
+  <section>
+    <div class="section-inner">
+      <div class="ceo-grid">
+        <div class="ceo-photo">
+          <div class="tech-frame"><img src="ceo.jpg" alt="Dharmesh Patel, MD — Chief Executive Officer, AMD Global"></div>
+          <div class="ceo-name-band">
+            <h3>Dharmesh Patel, MD</h3>
+            <p>Chief Executive Officer</p>
+          </div>
+        </div>
+        <div class="ceo-content">
+          <p><strong>AMD Global's founder and CEO, Dharmesh Patel, MD,</strong> is an emergency room physician.</p>
+          <p>Prior to establishing AMD Global, Dr. Patel was Co-Founder of Neighbors Emergency Centers and served as Chief Operating Officer from 2009 to 2015. During his tenure, he helped steer and expand Neighbors Emergency Center from its infancy to one of the largest independently held systems of freestanding emergency rooms in the nation, with more than 30 locations across the United States. Dr. Patel later shifted his healthcare development prowess to AMD Global to deliver some of the nation's leading medical, billing, and real estate assets.</p>
+          <p>Through Dr. Patel's vision, AMD Global has expanded its list of projects to include Class-A medical office buildings, ambulatory surgery centers, freestanding emergency rooms, micro-hospitals, and full-sized general acute care hospitals. While expanding AMD Global's healthcare footprint, Dr. Patel successfully created management and staffing companies for these facilities to provide back-office services, including accounting, supply-chain management, legal, HR, credentialing, and on-boarding support.</p>
+          <p>With over ten years of primary experience, Dr. Patel has created one of the most prominent revenue cycle management companies that specialize in both in-network and out-of-network professional and facility billing in the region.</p>
+          <div class="ceo-quote">
+            <p>"The key to a successful healthcare venture is the integration of development, lean operations, clinical processes, and an efficient, structured revenue cycle. Not many companies are able to marry all of these components into a cohesive business strategy, and this is why AMD Global stands out amongst the crowd of healthcare service companies. AMD not only develops, manages, invests and operates for others, but we also do the same for the facilities we wholly own."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══ REAL ESTATE ═══ -->
+<div class="page" id="page-realestate">
+  <div class="page-header">
+    <div class="tech-grid"></div>
+    <div class="page-header-inner">
+      <div class="hero-eyebrow"><span class="pulse-dot"></span>Real estate</div>
+      <h1>Healthcare real estate portfolio</h1>
+      <p>Purpose-built healthcare facilities — developed, owned, and operated by AMD Global as part of our physician-centric development mission.</p>
+    </div>
+  </div>
+  <section>
+    <div class="section-inner">
+      <div class="re-item">
+        <div class="re-visual">
+          <div class="tech-frame"><img src="hospital.jpg" alt="Heights Hospital — Houston"></div>
+        </div>
+        <div class="re-text">
+          <h3>Hospitals & micro-hospitals</h3>
+          <p>AMD's hospital developments deliver comprehensive inpatient and outpatient care across major medical specialties. Heights Hospital in Houston has been licensed and operational since 2018 — and AMD pioneered the micro-hospital format, developing one of the first in the country.</p>
+          <div class="re-features"><span class="feature-tag">Inpatient care</span><span class="feature-tag">Emergency services</span><span class="feature-tag">Oncology & infusion</span><span class="feature-tag">Surgical suites</span><span class="feature-tag">Sleep labs</span></div>
+        </div>
+      </div>
+      <div class="re-item">
+        <div class="re-visual">
+          <div class="tech-frame"><img src="fsec.jpg" alt="Laredo Emergency Room — free-standing emergency center"></div>
+        </div>
+        <div class="re-text">
+          <h3>Free-standing emergency centers</h3>
+          <p>AMD founded one of the first free-standing emergency centers — bringing emergency-level care into communities, outside traditional hospital campuses. These facilities deliver rapid, high-acuity treatment with the accessibility patients expect.</p>
+          <div class="re-features"><span class="feature-tag">Emergency-level care</span><span class="feature-tag">Community access</span><span class="feature-tag">Rapid treatment</span></div>
+        </div>
+      </div>
+      <div class="re-item">
+        <div class="re-visual">
+          <div class="tech-frame"><img src="imaging.jpg" alt="Diagnostic imaging suite"></div>
+        </div>
+        <div class="re-text">
+          <h3>Urgent care & imaging centers</h3>
+          <p>Modern urgent care and advanced diagnostic imaging developments designed for rapid, high-quality outpatient treatment. These centers bridge the gap between primary care and emergency services, with digital scanning technology and rapid result turnaround integrated into AMD's facility network. The Brownsville imaging center is currently in construction, with an additional imaging center in development in McAllen.</p>
+          <div class="re-features"><span class="feature-tag">Walk-in services</span><span class="feature-tag">Digital scanning</span><span class="feature-tag">Rapid results</span><span class="feature-tag">Brownsville · in construction</span><span class="feature-tag">McAllen · in development</span></div>
+        </div>
+      </div>
+      <div class="re-item">
+        <div class="re-visual">
+          <div class="tech-frame"><img src="hedwig.jpg" alt="Hedwig Place — Class A medical office development"></div>
+        </div>
+        <div class="re-text">
+          <h3>Class A office & specialty centers</h3>
+          <p>Hedwig Place — AMD's premium Class A office development — stands alongside 24/7 wound care centers staffed with board-certified podiatrists, infectious disease physicians, nurses, and technicians, plus a growing roster of medical specialty services.</p>
+          <div class="re-features"><span class="feature-tag">Class A office</span><span class="feature-tag">24/7 wound care</span><span class="feature-tag">Board-certified specialists</span><span class="feature-tag">Medical specialties</span></div>
+        </div>
+      </div>
+      <div class="re-item">
+        <div class="re-visual">
+          <div class="tech-frame"><img src="medspa-portfolio.jpg" alt="AMD Global facility interior"></div>
+        </div>
+        <div class="re-text">
+          <h3>MedSpas</h3>
+          <p>AMD's newest vertical brings physician-centric development to medical aesthetics. Operating locations in Katy and Corpus Christi are joined by active developments in Cypress — the flagship — and Brownsville, each pairing clinical-grade treatment spaces with a premium patient environment.</p>
+          <div class="re-features"><span class="feature-tag">Katy · operational</span><span class="feature-tag">Corpus Christi · operational</span><span class="feature-tag">Cypress · flagship in development</span><span class="feature-tag">Brownsville · in development</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══ MANAGEMENT SERVICES ═══ -->
+<div class="page" id="page-services">
+  <div class="page-header">
+    <div class="tech-grid"></div>
+    <div class="page-header-inner">
+      <div class="hero-eyebrow"><span class="pulse-dot"></span>Management services</div>
+      <h1>Full-service healthcare operations</h1>
+      <p>AMD manages every layer of healthcare operations — powered by technology, so facilities run efficiently, profitably, and at the highest standard of care.</p>
+    </div>
+  </div>
+  <section>
+    <div class="section-inner">
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="value-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+          <h3>Revenue cycle management</h3>
+          <p>End-to-end billing optimization including CMS-1500 and CMS-1450 claims processing, Medicare and Medicaid reimbursement, and commercial payer contracting. Our dedicated billing team improves revenue cycle accuracy and reduces payment delays.</p>
+        </div>
+        <div class="service-card">
+          <div class="value-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+          <h3>EHR / EMR platform</h3>
+          <p>Tailored electronic health record platforms that improve treatment efficiency and elevate patients' continuity of care. Our systems eliminate redundant paperwork, automate administrative tasks, and facilitate prior authorizations seamlessly.</p>
+        </div>
+        <div class="service-card">
+          <div class="value-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+          <h3>Business office management</h3>
+          <p>Cross-silo management of medical business offices including administrative staffing, HR, scheduling, bookkeeping, budget management, and inter-department coordination — so clinical staff can focus on patient care.</p>
+        </div>
+        <div class="service-card">
+          <div class="value-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+          <h3>Facility management</h3>
+          <p>Comprehensive premises and equipment management including leasing, maintenance, repair, and long-term capital planning. AMD ensures every facility operates at peak performance and maintains its asset value over time.</p>
+        </div>
+        <div class="service-card">
+          <div class="value-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+          <h3>Physician billing</h3>
+          <p>Customizable CMS-1500 software suite that saves providers substantial time and money. Our system helps users quickly access patient information, expedite payments, and improve revenue cycle performance across Medicare, Medicaid, and commercial insurers.</p>
+        </div>
+        <div class="service-card">
+          <div class="value-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+          <h3>Operations management</h3>
+          <p>Driven by a highly experienced management team overseeing operations across every AMD asset holding — providing data-driven policy structures, workforce engagement strategies, and health system financing to keep facilities running profitably.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══ INVESTMENTS ═══ -->
+<div class="page" id="page-investments">
+  <div class="page-header">
+    <div class="tech-grid"></div>
+    <div class="page-header-inner">
+      <div class="hero-eyebrow"><span class="pulse-dot"></span>Investments</div>
+      <h1>Investment services</h1>
+      <p>AMD Global provides investment services for partners and third-party investors — offering exposure to distinct opportunities in healthcare development and our diversified sectors.</p>
+    </div>
+  </div>
+  <section>
+    <div class="section-inner">
+      <div class="section-eyebrow">Our approach</div>
+      <h2 class="section-title">Disciplined, diversified, dependable</h2>
+      <p class="section-sub">Our investment philosophy is grounded in the same principles that guide our healthcare developments: the highest ethical standards, social responsibility, and preservation of maximum value.</p>
+      <div class="invest-principles">
+        <div class="principle"><div class="principle-num">01</div><div><h4>Healthcare-anchored resilience</h4><p>Healthcare infrastructure maintains demand regardless of economic cycles — communities always need medical facilities and care.</p></div></div>
+        <div class="principle"><div class="principle-num">02</div><div><h4>Vertically integrated value chain</h4><p>From development to daily operations, AMD controls the entire value chain — reducing third-party risk and preserving returns.</p></div></div>
+        <div class="principle"><div class="principle-num">03</div><div><h4>Physician-centric edge</h4><p>Facilities designed by practicing physicians outperform — clinically informed development is AMD's structural advantage.</p></div></div>
+        <div class="principle"><div class="principle-num">04</div><div><h4>Proven track record</h4><p>Pioneering completed developments — among the first free-standing emergency centers and micro-hospitals — through volatile economic and regulatory environments.</p></div></div>
+        <div class="principle"><div class="principle-num">05</div><div><h4>Diversified exposure</h4><p>Healthcare, commercial real estate, energy, and occupational care assets spread and balance portfolio risk across sectors.</p></div></div>
+        <div class="principle"><div class="principle-num">06</div><div><h4>Partner-first structure</h4><p>Full-service development management and investment services designed around the goals of our partners and third-party investors.</p></div></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══ DEVELOPMENTS ═══ -->
+<div class="page" id="page-developments">
+  <div class="page-header">
+    <div class="tech-grid"></div>
+    <div class="page-header-inner">
+      <div class="hero-eyebrow"><span class="pulse-dot"></span>Developments</div>
+      <h1>Healthcare projects in motion</h1>
+      <p>Completed, operating, and active developments — the proof behind AMD Global's physician-centric development model.</p>
+    </div>
+  </div>
+  <section>
+    <div class="section-inner">
+      <div class="dev-timeline">
+        <div class="dev-item">
+          <div class="dev-dot"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8M8 12h8"/></svg></div>
+          <div class="dev-content">
+            <div class="dev-header"><h3>Heights Hospital</h3><span class="dev-status status-active">Delivered</span></div>
+            <p>AMD's flagship healthcare development, licensed September 2018. Provides full-spectrum care including inpatient services, palliative care, recovery, oncology and infusion, wound care, stress tests, sleep labs, transcranial magnetic stimulation therapy, and outpatient services. Clinical expertise spans internal medicine through highly specialized fields including endocrinology.</p>
+            <div class="dev-img"><div class="tech-frame"><img src="heights.jpg" alt="Heights Hospital"></div></div>
+          </div>
+        </div>
+        <div class="dev-item">
+          <div class="dev-dot"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+          <div class="dev-content">
+            <div class="dev-header"><h3>Free-standing emergency center</h3><span class="dev-status status-active">Delivered</span></div>
+            <p>Among the first free-standing emergency centers — a pioneering AMD development that brought emergency-level care into the community, outside traditional hospital campuses. A proof point for AMD's ability to deliver novel healthcare formats ahead of the market.</p>
+            <div class="dev-img"><div class="tech-frame"><img src="fsec-dev.jpg" alt="Laredo Emergency Room"></div></div>
+          </div>
+        </div>
+        <div class="dev-item">
+          <div class="dev-dot"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+          <div class="dev-content">
+            <div class="dev-header"><h3>Micro-hospital — Louisiana</h3><span class="dev-status status-active">Delivered</span></div>
+            <p>One of the first micro-hospitals developed in the country — a compact, full-capability hospital format engineered for faster delivery and community-scale access to inpatient care. AMD's micro-hospital model demonstrated that high-acuity care can be delivered in a smaller, smarter footprint.</p>
+            <div class="dev-img"><div class="tech-frame"><img src="microhospital.jpg" alt="Avail Health — Lake Charles micro-hospital"></div></div>
+          </div>
+        </div>
+        <div class="dev-item">
+          <div class="dev-dot"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="12" y2="17"/></svg></div>
+          <div class="dev-content">
+            <div class="dev-header"><h3>Hedwig Place</h3><span class="dev-status status-active">Delivered</span></div>
+            <p>AMD's Class A office development, delivered to institutional standards. Hedwig Place is home to physician practices, clinical services, and professional tenants — designed around the workflows of the medical community it serves, and a demonstration of AMD's ability to deliver premium commercial real estate alongside healthcare facilities.</p>
+            <div class="dev-img"><div class="tech-frame"><img src="hedwig-dev.jpg" alt="Hedwig Place"></div></div>
+          </div>
+        </div>
+        <div class="dev-item">
+          <div class="dev-dot"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+          <div class="dev-content">
+            <div class="dev-header"><h3>Urgent care & imaging expansion</h3><span class="dev-status status-progress">In development</span></div>
+            <p>AMD is expanding its healthcare development portfolio with urgent care facilities and diagnostic imaging centers — rapid-access outpatient care with advanced digital scanning, integrated with AMD's EHR/EMR platform and broader facility network. The Brownsville imaging center is currently in construction, and a new imaging center is in development in McAllen — extending AMD's diagnostic footprint across South Texas.</p>
+            <div class="dev-img"><div class="tech-frame"><img src="imaging-expansion.jpg" alt="Diagnostic imaging — CT suite"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Case study: Lake Charles ── -->
+  <section style="background:var(--off-white); padding-top: 0;">
+    <div class="section-inner">
+      <div class="case-study" style="margin-top: 0;">
+        <div>
+          <span class="case-study-tag">Case study</span>
+          <h3>Avail Hospital — Lake Charles, Louisiana</h3>
+          <p>AMD developed one of the first micro-hospitals in Louisiana — a compact, full-capability hospital delivering emergency and inpatient care at community scale. Designed by physicians and delivered by AMD's vertically integrated model, the project moved from site selection to licensed operations on an accelerated timeline, proving that high-acuity care can be brought to underserved markets in a smaller, smarter footprint.</p>
+          <div class="case-facts">
+            <span class="case-fact">Micro-hospital format</span>
+            <span class="case-fact">Physician-led design</span>
+            <span class="case-fact">Emergency & inpatient care</span>
+            <span class="case-fact">Vertically integrated delivery</span>
+          </div>
+        </div>
+        <div>
+          <div class="tech-frame"><img src="lakecharles.jpg" alt="Avail Hospital — Lake Charles, Louisiana"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── MedSpa developments ── -->
+  <section>
+    <div class="section-inner">
+      <div class="section-eyebrow">New vertical</div>
+      <h2 class="section-title">MedSpa developments</h2>
+      <p class="section-sub">AMD is bringing its physician-centric development model to medical aesthetics — purpose-built MedSpa facilities combining clinical standards with a premium patient experience.</p>
+
+      <div class="medspa-feature">
+        <div>
+          <div class="tech-frame"><img src="cypress-medspa.jpg" alt="Cypress MedSpa — interior rendering"></div>
+          <div class="frame-caption">Interior rendering · Cypress development</div>
+        </div>
+        <div>
+          <h3 style="font-family:var(--font-display); font-size:24px; font-weight:800; letter-spacing:-0.4px; margin-bottom:6px;">Cypress — flagship development</h3>
+          <span class="dev-status status-progress" style="display:inline-block; margin-bottom:16px;">In development</span>
+          <p style="font-size:15px; color:var(--text-secondary); line-height:1.8;">The Cypress location is AMD's flagship MedSpa development — currently in active development and designed to set the standard for the vertical. The facility pairs physician-grade clinical treatment spaces with a hospitality-level environment, built to the same standards AMD applies to its hospitals and emergency centers.</p>
+        </div>
+      </div>
+
+      <div class="loc-grid">
+        <div class="loc-card">
+          <span class="dev-status status-active">Operational</span>
+          <h4>Katy</h4>
+          <p>Operating MedSpa location serving the Katy community with physician-supervised aesthetic and wellness services.</p>
+        </div>
+        <div class="loc-card">
+          <span class="dev-status status-active">Operational</span>
+          <h4>Corpus Christi</h4>
+          <p>Operating MedSpa location bringing AMD's clinical standards to medical aesthetics on the Gulf Coast.</p>
+        </div>
+        <div class="loc-card">
+          <span class="dev-status status-progress">In development</span>
+          <h4>Brownsville</h4>
+          <p>A new MedSpa development in Brownsville — expanding the vertical into the Rio Grande Valley, alongside AMD's imaging center currently in construction in the same market.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══ CONTACT ═══ -->
+<div class="page" id="page-contact">
+  <div class="page-header">
+    <div class="tech-grid"></div>
+    <div class="page-header-inner">
+      <div class="hero-eyebrow"><span class="pulse-dot"></span>Contact</div>
+      <h1>Develop your next project with AMD</h1>
+      <p>Physicians, developers, partners, and community stakeholders — tell us what you're building, and let's talk about how AMD can deliver it.</p>
+    </div>
+  </div>
+  <section>
+    <div class="section-inner">
+      <div class="contact-info">
+            <div class="contact-item">
+              <div class="contact-icon-wrap"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+              <div><h4>Address</h4><p>1500 Citywest Blvd<br>Houston, TX 77024</p></div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon-wrap"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.5 19.79 19.79 0 01.22 4.72 2 2 0 012.2 2.5h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 9.9a16 16 0 006.29 6.29l.48-.48a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 18z"/></svg></div>
+              <!-- TWILIO: replace the number below with the new Twilio tracking number when it's provisioned -->
+              <div><h4>Phone</h4><p>(713) 590-0640</p></div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon-wrap"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+              <div><h4>Email</h4><p>info@amdglobal.com</p></div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon-wrap"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+              <div><h4>Hours</h4><p>Monday – Friday<br>9:00 AM – 5:00 PM CST</p></div>
+            </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo-chip"><img src="logo.png" alt="AMD Global"></div>
+        <p>A physician-centric, Houston-based development firm specializing in healthcare development — with a diversified portfolio spanning commercial real estate, energy, and occupational care.</p>
+        <!-- TWILIO: replace the number below with the new Twilio tracking number when it's provisioned -->
+        <div class="footer-contact-line"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.5 19.79 19.79 0 01.22 4.72 2 2 0 012.2 2.5h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 9.9a16 16 0 006.29 6.29l.48-.48a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 18z"/></svg>(713) 590-0640</div>
+        <div class="footer-contact-line"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>1500 Citywest Blvd · Houston, TX 77024</div>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul class="footer-links">
+          <li><a onclick="showPage('home')">About us</a></li>
+          <li><a onclick="showPage('ceo')">About the CEO</a></li>
+          <li><a onclick="showPage('developments')">Developments</a></li>
+          <li><a onclick="showPage('contact')">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Real estate</h4>
+        <ul class="footer-links">
+          <li><a onclick="showPage('realestate')">Hospitals & micro-hospitals</a></li>
+          <li><a onclick="showPage('realestate')">Emergency centers</a></li>
+          <li><a onclick="showPage('realestate')">Urgent care & imaging</a></li>
+          <li><a onclick="showPage('realestate')">MedSpas</a></li>
+          <li><a onclick="showPage('realestate')">Hedwig Place & specialties</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul class="footer-links">
+          <li><a onclick="showPage('services')">Revenue cycle</a></li>
+          <li><a onclick="showPage('services')">EHR / EMR platform</a></li>
+          <li><a onclick="showPage('services')">Business office</a></li>
+          <li><a onclick="showPage('investments')">Investments</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 AMD Global LLC · All rights reserved · Houston, TX</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  document.querySelectorAll('.nav-links a[data-page]').forEach(a => {
+    a.classList.toggle('active', a.getAttribute('data-page') === id);
+  });
+  document.getElementById('navLinks').classList.remove('open');
+  window.scrollTo({ top: 0, behavior: 'instant' });
+}
+function toggleMenu() { document.getElementById('navLinks').classList.toggle('open'); }
+
+</script>
+</body>
+</html>
